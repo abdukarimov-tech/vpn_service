@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(6),
                 child: Image.asset(
-                  'assets/icon.png',
+                  'assets/icon.jpeg',
                   height: 32,
                   width: 32,
                   fit: BoxFit.cover,
