@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             ),
             const SizedBox(width: 12),
             const Text(
-              "NEON VPN",
+              "FREE VPN",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w900,
