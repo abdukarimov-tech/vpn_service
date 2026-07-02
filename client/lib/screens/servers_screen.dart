@@ -35,7 +35,7 @@ class ServersScreen extends StatelessWidget {
                   Icon(
                     Icons.cloud_off,
                     size: 64,
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                   ),
                   const SizedBox(height: 16),
                   const Text(
@@ -76,13 +76,13 @@ class ServersScreen extends StatelessWidget {
                       color: isSelected ? const Color(0xFF1E1E2F) : const Color(0xFF161626),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: isSelected ? Colors.cyanAccent : Colors.white.withOpacity(0.05),
+                        color: isSelected ? Colors.cyanAccent : Colors.white.withValues(alpha: 0.05),
                         width: 1.5,
                       ),
                       boxShadow: isSelected
                           ? [
                               BoxShadow(
-                                color: Colors.cyanAccent.withOpacity(0.1),
+                                color: Colors.cyanAccent.withValues(alpha: 0.1),
                                 blurRadius: 10,
                                 spreadRadius: 1,
                               )
@@ -96,8 +96,8 @@ class ServersScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: isSelected 
-                                ? Colors.cyanAccent.withOpacity(0.15) 
-                                : Colors.white.withOpacity(0.05),
+                                ? Colors.cyanAccent.withValues(alpha: 0.15) 
+                                : Colors.white.withValues(alpha: 0.05),
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
@@ -123,7 +123,7 @@ class ServersScreen extends StatelessWidget {
                               Text(
                                 "IP: ${server.ip}",
                                 style: TextStyle(
-                                  color: Colors.white.withOpacity(0.4),
+                                  color: Colors.white.withValues(alpha: 0.4),
                                   fontSize: 12,
                                 ),
                               ),
@@ -139,7 +139,7 @@ class ServersScreen extends StatelessWidget {
                         else
                           Icon(
                             Icons.circle_outlined,
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                           ),
                       ],
                     ),

@@ -53,19 +53,17 @@ class AdService {
       builder: (BuildContext dialogContext) {
         return StatefulBuilder(
           builder: (context, setState) {
-            if (timer == null) {
-              timer = Timer.periodic(const Duration(seconds: 1), (t) {
-                if (secondsRemaining > 1) {
-                  setState(() {
-                    secondsRemaining--;
-                  });
-                } else {
-                  t.cancel();
-                  Navigator.of(dialogContext).pop();
-                  completer.complete(true);
-                }
-              });
-            }
+            timer ??= Timer.periodic(const Duration(seconds: 1), (t) {
+              if (secondsRemaining > 1) {
+                setState(() {
+                  secondsRemaining--;
+                });
+              } else {
+                t.cancel();
+                Navigator.of(dialogContext).pop();
+                completer.complete(true);
+              }
+            });
 
             return PopScope(
               canPop: false, // Prevent dismissal

@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.cyan.withOpacity(0.1),
+                color: Colors.cyan.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: const Icon(
@@ -182,8 +182,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: provider.isConnected
-                                    ? Colors.green.withOpacity(0.04)
-                                    : Colors.cyan.withOpacity(0.04),
+                                    ? Colors.green.withValues(alpha: 0.04)
+                                    : Colors.cyan.withValues(alpha: 0.04),
                               ),
                             );
                           },
@@ -197,8 +197,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: provider.isConnected
-                                    ? Colors.green.withOpacity(0.08)
-                                    : Colors.cyan.withOpacity(0.08),
+                                    ? Colors.green.withValues(alpha: 0.08)
+                                    : Colors.cyan.withValues(alpha: 0.08),
                               ),
                             );
                           },
@@ -214,10 +214,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                             boxShadow: [
                               BoxShadow(
                                 color: provider.isConnected
-                                    ? Colors.greenAccent.withOpacity(0.4)
+                                    ? Colors.greenAccent.withValues(alpha: 0.4)
                                     : provider.vpnState == 'CONNECTING'
-                                        ? Colors.orangeAccent.withOpacity(0.4)
-                                        : Colors.cyanAccent.withOpacity(0.4),
+                                        ? Colors.orangeAccent.withValues(alpha: 0.4)
+                                        : Colors.cyanAccent.withValues(alpha: 0.4),
                                 blurRadius: 30,
                                 spreadRadius: 2,
                               ),
@@ -252,7 +252,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       color: const Color(0xFF161626),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.05),
+                        color: Colors.white.withValues(alpha: 0.05),
                         width: 1,
                       ),
                     ),
@@ -263,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                         Container(
                           height: 32,
                           width: 1,
-                          color: Colors.white.withOpacity(0.1),
+                          color: Colors.white.withValues(alpha: 0.1),
                         ),
                         _buildInfoColumn(
                           "СТАТУС",
@@ -291,7 +291,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
+                            color: Colors.black.withValues(alpha: 0.2),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),
@@ -302,7 +302,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: Colors.cyanAccent.withOpacity(0.1),
+                              color: Colors.cyanAccent.withValues(alpha: 0.1),
                               shape: BoxShape.circle,
                             ),
                             child: const Icon(
