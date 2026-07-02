@@ -2,7 +2,7 @@
     <application
         android:label="FREE VPN"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/ic_launcher">
         
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

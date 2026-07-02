@@ -1,5 +1,7 @@
+import 'package:client/providers/settings_provider.dart';
 import 'package:client/providers/vpn_provider.dart';
 import 'package:client/screens/servers_screen.dart';
+import 'package:client/screens/settings_screen.dart';
 import 'package:client/services/ad_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   }
 
   void _handleConnectTap(VpnProvider provider) async {
+    final settings = Provider.of<SettingsProvider>(context, listen: false);
     if (provider.isConnected) {
       // Disconnect directly
       await provider.disconnect();
@@ -53,8 +56,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         _pulseController.repeat(reverse: true);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Необходимо досмотреть видео для подключения к VPN"),
+          SnackBar(
+            content: Text(settings.translate('ad_warning')),
             backgroundColor: Colors.redAccent,
           ),
         );
@@ -65,6 +68,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<VpnProvider>(context);
+    final settings = Provider.of<SettingsProvider>(context);
+    final theme = Theme.of(context);
+    final isDark = settings.isDarkMode;
 
     // Keep pulse animation updated based on status
     if (provider.isConnected && !_pulseController.isAnimating) {
@@ -74,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0C0C14),
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -97,10 +103,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               ),
             ),
             const SizedBox(width: 12),
-            const Text(
-              "FREE VPN",
+            Text(
+              settings.translate('title'),
               style: TextStyle(
-                color: Colors.white,
+                color: isDark ? Colors.white : Colors.black87,
                 fontWeight: FontWeight.w900,
                 letterSpacing: 1.5,
                 fontSize: 20,
@@ -110,20 +116,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings_outlined, color: Colors.white70),
+            icon: Icon(Icons.settings_outlined, color: isDark ? Colors.white70 : Colors.black87),
             onPressed: () {
-              // Quick config toggle mock/real ads
-              setState(() {
-                AdService().useMockAds = !AdService().useMockAds;
-              });
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    AdService().useMockAds 
-                        ? "Включен тестовый режим рекламы" 
-                        : "Включен режим реальной рекламы AdMob",
-                  ),
-                  duration: const Duration(seconds: 2),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SettingsScreen(),
                 ),
               );
             },
@@ -147,12 +145,14 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     children: [
                       Text(
                         provider.vpnState == 'CONNECTED'
-                            ? "ЗАЩИЩЕНО"
+                            ? settings.translate('secured')
                             : provider.vpnState == 'CONNECTING'
-                                ? "ПОДКЛЮЧЕНИЕ..."
-                                : "ОТКЛЮЧЕНО",
+                                ? settings.translate('connecting')
+                                : settings.translate('disconnected'),
                         style: TextStyle(
-                          color: provider.isConnected ? Colors.greenAccent : Colors.white70,
+                          color: provider.isConnected 
+                              ? Colors.greenAccent 
+                              : (isDark ? Colors.white70 : Colors.black54),
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2,
@@ -161,8 +161,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       const SizedBox(height: 8),
                       Text(
                         provider.vpnDuration,
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: isDark ? Colors.white : Colors.black87,
                           fontSize: 48,
                           fontWeight: FontWeight.w300,
                           fontFamily: 'Courier',
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           height: 150,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: const Color(0xFF1E1E2F),
+                            color: isDark ? const Color(0xFF1E1E2F) : Colors.white,
                             boxShadow: [
                               BoxShadow(
                                 color: provider.isConnected
@@ -254,25 +254,37 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF161626),
+                      color: theme.cardColor,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.05),
+                        color: isDark 
+                            ? Colors.white.withValues(alpha: 0.05) 
+                            : Colors.black.withValues(alpha: 0.05),
                         width: 1,
                       ),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _buildInfoColumn("ПРОТОКОЛ", "VLESS REALITY"),
+                        _buildInfoColumn(
+                          context,
+                          settings.translate('protocol'), 
+                          "VLESS REALITY",
+                          color: isDark ? Colors.white : Colors.black87,
+                        ),
                         Container(
                           height: 32,
                           width: 1,
-                          color: Colors.white.withValues(alpha: 0.1),
+                          color: isDark 
+                              ? Colors.white.withValues(alpha: 0.1) 
+                              : Colors.black.withValues(alpha: 0.1),
                         ),
                         _buildInfoColumn(
-                          "СТАТУС",
-                          provider.vpnState == 'CONNECTED' ? "АКТИВЕН" : "ОЖИДАНИЕ",
+                          context,
+                          settings.translate('status'),
+                          provider.vpnState == 'CONNECTED' 
+                              ? settings.translate('active') 
+                              : settings.translate('idle'),
                           color: provider.isConnected ? Colors.greenAccent : Colors.cyanAccent,
                         ),
                       ],
@@ -292,15 +304,21 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1E1E2F),
+                        color: theme.cardColor,
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.2),
+                            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.05),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),
                         ],
+                        border: Border.all(
+                          color: isDark 
+                              ? Colors.white.withValues(alpha: 0.05) 
+                              : Colors.black.withValues(alpha: 0.05),
+                          width: 1,
+                        ),
                       ),
                       child: Row(
                         children: [
@@ -320,19 +338,19 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "ВЫБРАННЫЙ СЕРВЕР",
+                                Text(
+                                  settings.translate('selected_server'),
                                   style: TextStyle(
-                                    color: Colors.white54,
+                                    color: isDark ? Colors.white54 : Colors.black54,
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  provider.selectedServer?.name ?? "Поиск локации...",
-                                  style: const TextStyle(
-                                    color: Colors.white,
+                                  provider.selectedServer?.name ?? settings.translate('locating_server'),
+                                  style: TextStyle(
+                                    color: isDark ? Colors.white : Colors.black87,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -340,9 +358,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               ],
                             ),
                           ),
-                          const Icon(
+                          Icon(
                             Icons.arrow_forward_ios,
-                            color: Colors.white54,
+                            color: isDark ? Colors.white54 : Colors.black54,
                             size: 16,
                           ),
                         ],
@@ -355,13 +373,15 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     );
   }
 
-  Widget _buildInfoColumn(String label, String value, {Color color = Colors.white}) {
+  Widget _buildInfoColumn(BuildContext context, String label, String value, {required Color color}) {
+    final settings = Provider.of<SettingsProvider>(context, listen: false);
+    final isDark = settings.isDarkMode;
     return Column(
       children: [
         Text(
           label,
-          style: const TextStyle(
-            color: Colors.white38,
+          style: TextStyle(
+            color: isDark ? Colors.white38 : Colors.black38,
             fontSize: 11,
             fontWeight: FontWeight.bold,
           ),

@@ -1,5 +1,6 @@
 import 'package:client/models/server_model.dart';
 import 'package:client/providers/vpn_provider.dart';
+import 'package:client/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,20 +10,23 @@ class ServersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<VpnProvider>(context);
+    final settings = Provider.of<SettingsProvider>(context);
+    final theme = Theme.of(context);
+    final isDark = settings.isDarkMode;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0C0C14),
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: isDark ? Colors.white : Colors.black87),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text(
-          "Локации VPN",
+        title: Text(
+          settings.translate('vpn_locations'),
           style: TextStyle(
-            color: Colors.white,
+            color: isDark ? Colors.white : Colors.black87,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -35,13 +39,13 @@ class ServersScreen extends StatelessWidget {
                   Icon(
                     Icons.cloud_off,
                     size: 64,
-                    color: Colors.white.withValues(alpha: 0.2),
+                    color: isDark ? Colors.white.withValues(alpha: 0.2) : Colors.black.withValues(alpha: 0.2),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    "Нет доступных серверов",
+                  Text(
+                    settings.translate('no_servers'),
                     style: TextStyle(
-                      color: Colors.white54,
+                      color: isDark ? Colors.white54 : Colors.black54,
                       fontSize: 16,
                     ),
                   ),
@@ -49,9 +53,9 @@ class ServersScreen extends StatelessWidget {
                   TextButton.icon(
                     onPressed: () => provider.init(),
                     icon: const Icon(Icons.refresh, color: Colors.cyanAccent),
-                    label: const Text(
-                      "Обновить",
-                      style: TextStyle(color: Colors.cyanAccent),
+                    label: Text(
+                      settings.translate('refresh'),
+                      style: const TextStyle(color: Colors.cyanAccent),
                     ),
                   ),
                 ],
@@ -73,10 +77,14 @@ class ServersScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 16),
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: isSelected ? const Color(0xFF1E1E2F) : const Color(0xFF161626),
+                      color: isSelected 
+                          ? (isDark ? const Color(0xFF1E1E2F) : Colors.cyan.withValues(alpha: 0.1)) 
+                          : theme.cardColor,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: isSelected ? Colors.cyanAccent : Colors.white.withValues(alpha: 0.05),
+                        color: isSelected 
+                            ? Colors.cyanAccent 
+                            : (isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05)),
                         width: 1.5,
                       ),
                       boxShadow: isSelected
@@ -97,12 +105,12 @@ class ServersScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: isSelected 
                                 ? Colors.cyanAccent.withValues(alpha: 0.15) 
-                                : Colors.white.withValues(alpha: 0.05),
+                                : (isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05)),
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
                             Icons.dns_outlined,
-                            color: isSelected ? Colors.cyanAccent : Colors.white70,
+                            color: isSelected ? Colors.cyanAccent : (isDark ? Colors.white70 : Colors.black54),
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -113,8 +121,8 @@ class ServersScreen extends StatelessWidget {
                             children: [
                               Text(
                                 server.name,
-                                style: const TextStyle(
-                                  color: Colors.white,
+                                style: TextStyle(
+                                  color: isDark ? Colors.white : Colors.black87,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -123,7 +131,7 @@ class ServersScreen extends StatelessWidget {
                               Text(
                                 "IP: ${server.ip}",
                                 style: TextStyle(
-                                  color: Colors.white.withValues(alpha: 0.4),
+                                  color: isDark ? Colors.white.withValues(alpha: 0.4) : Colors.black38,
                                   fontSize: 12,
                                 ),
                               ),
@@ -139,7 +147,7 @@ class ServersScreen extends StatelessWidget {
                         else
                           Icon(
                             Icons.circle_outlined,
-                            color: Colors.white.withValues(alpha: 0.2),
+                            color: isDark ? Colors.white.withValues(alpha: 0.2) : Colors.black.withValues(alpha: 0.2),
                           ),
                       ],
                     ),
