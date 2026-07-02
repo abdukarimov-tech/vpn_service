@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "dev.rudnowski.freevpn"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
