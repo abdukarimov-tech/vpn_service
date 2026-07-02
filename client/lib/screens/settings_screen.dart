@@ -257,7 +257,6 @@ class SettingsScreen extends StatelessWidget {
       ),
       child: Material(
         color: isDark ? const Color(0xFF161626) : Colors.white,
-        borderRadius: BorderRadius.circular(16),
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
