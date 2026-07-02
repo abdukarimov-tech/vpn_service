@@ -86,7 +86,7 @@ class SettingsScreen extends StatelessWidget {
               _buildSettingsCard(
                 isDark: isDark,
                 child: SwitchListTile(
-                  activeColor: Colors.cyanAccent,
+                  activeThumbColor: Colors.cyanAccent,
                   activeTrackColor: Colors.cyan.withValues(alpha: 0.3),
                   inactiveThumbColor: Colors.grey,
                   inactiveTrackColor: Colors.grey.withValues(alpha: 0.3),
