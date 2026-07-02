@@ -71,6 +71,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     final settings = Provider.of<SettingsProvider>(context);
     final theme = Theme.of(context);
     final isDark = settings.isDarkMode;
+    
+    // Indigo/Blue for light theme, Cyan for dark theme
+    final accentColor = isDark ? Colors.cyanAccent : const Color(0xFF2563EB);
+    final accentColorMuted = isDark ? Colors.cyan : const Color(0xFF3B82F6);
 
     // Keep pulse animation updated based on status
     if (provider.isConnected && !_pulseController.isAnimating) {
@@ -89,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             Container(
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: Colors.cyan.withValues(alpha: 0.1),
+                color: accentColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ClipRRect(
@@ -188,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                 shape: BoxShape.circle,
                                 color: provider.isConnected
                                     ? Colors.green.withValues(alpha: 0.04)
-                                    : Colors.cyan.withValues(alpha: 0.04),
+                                    : accentColorMuted.withValues(alpha: 0.04),
                               ),
                             );
                           },
@@ -203,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                 shape: BoxShape.circle,
                                 color: provider.isConnected
                                     ? Colors.green.withValues(alpha: 0.08)
-                                    : Colors.cyan.withValues(alpha: 0.08),
+                                    : accentColorMuted.withValues(alpha: 0.08),
                               ),
                             );
                           },
@@ -222,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                     ? Colors.greenAccent.withValues(alpha: 0.4)
                                     : provider.vpnState == 'CONNECTING'
                                         ? Colors.orangeAccent.withValues(alpha: 0.4)
-                                        : Colors.cyanAccent.withValues(alpha: 0.4),
+                                        : accentColor.withValues(alpha: 0.4),
                                 blurRadius: 30,
                                 spreadRadius: 2,
                               ),
@@ -232,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                   ? Colors.greenAccent
                                   : provider.vpnState == 'CONNECTING'
                                       ? Colors.orangeAccent
-                                      : Colors.cyanAccent,
+                                      : accentColor,
                               width: 3,
                             ),
                           ),
@@ -243,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                 ? Colors.greenAccent
                                 : provider.vpnState == 'CONNECTING'
                                     ? Colors.orangeAccent
-                                    : Colors.cyanAccent,
+                                    : accentColor,
                           ),
                         ),
                       ],
@@ -285,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           provider.vpnState == 'CONNECTED' 
                               ? settings.translate('active') 
                               : settings.translate('idle'),
-                          color: provider.isConnected ? Colors.greenAccent : Colors.cyanAccent,
+                          color: provider.isConnected ? Colors.greenAccent : accentColor,
                         ),
                       ],
                     ),
@@ -325,12 +329,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: Colors.cyanAccent.withValues(alpha: 0.1),
+                              color: accentColor.withValues(alpha: 0.1),
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.location_on,
-                              color: Colors.cyanAccent,
+                              color: accentColor,
                             ),
                           ),
                           const SizedBox(width: 16),

@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       themeMode: settings.themeMode,
       theme: ThemeData(
         brightness: Brightness.light,
-        primarySwatch: Colors.cyan,
+        primarySwatch: Colors.indigo,
         scaffoldBackgroundColor: const Color(0xFFF4F5F9),
         cardColor: Colors.white,
         appBarTheme: const AppBarTheme(

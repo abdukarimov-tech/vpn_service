@@ -59,6 +59,9 @@ class SettingsScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = settings.isDarkMode;
 
+    final accentColor = isDark ? Colors.cyanAccent : const Color(0xFF2563EB);
+    final accentColorMuted = isDark ? Colors.cyan : const Color(0xFF3B82F6);
+
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
@@ -86,8 +89,8 @@ class SettingsScreen extends StatelessWidget {
               _buildSettingsCard(
                 isDark: isDark,
                 child: SwitchListTile(
-                  activeThumbColor: Colors.cyanAccent,
-                  activeTrackColor: Colors.cyan.withValues(alpha: 0.3),
+                  activeThumbColor: accentColor,
+                  activeTrackColor: accentColorMuted.withValues(alpha: 0.3),
                   inactiveThumbColor: Colors.grey,
                   inactiveTrackColor: Colors.grey.withValues(alpha: 0.3),
                   value: settings.isDarkMode,
@@ -107,7 +110,7 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   secondary: Icon(
                     settings.isDarkMode ? Icons.dark_mode_outlined : Icons.light_mode_outlined,
-                    color: Colors.cyanAccent,
+                    color: accentColor,
                   ),
                 ),
               ),
@@ -122,7 +125,7 @@ class SettingsScreen extends StatelessWidget {
               _buildSettingsCard(
                 isDark: isDark,
                 child: ListTile(
-                  leading: const Icon(Icons.language_outlined, color: Colors.cyanAccent),
+                  leading: Icon(Icons.language_outlined, color: accentColor),
                   title: Text(
                     settings.translate('language'),
                     style: TextStyle(
@@ -132,8 +135,8 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   trailing: SegmentedButton<String>(
                     style: SegmentedButton.styleFrom(
-                      selectedBackgroundColor: Colors.cyanAccent.withValues(alpha: 0.2),
-                      selectedForegroundColor: isDark ? Colors.cyanAccent : Colors.cyan.shade700,
+                      selectedBackgroundColor: accentColor.withValues(alpha: 0.2),
+                      selectedForegroundColor: accentColor,
                       foregroundColor: isDark ? Colors.white70 : Colors.black54,
                     ),
                     segments: <ButtonSegment<String>>[
@@ -164,7 +167,7 @@ class SettingsScreen extends StatelessWidget {
               _buildSettingsCard(
                 isDark: isDark,
                 child: ListTile(
-                  leading: const Icon(Icons.info_outline, color: Colors.cyanAccent),
+                  leading: Icon(Icons.info_outline, color: accentColor),
                   title: Text(
                     settings.translate('about'),
                     style: TextStyle(
@@ -185,7 +188,7 @@ class SettingsScreen extends StatelessWidget {
               _buildSettingsCard(
                 isDark: isDark,
                 child: ListTile(
-                  leading: const Icon(Icons.privacy_tip_outlined, color: Colors.cyanAccent),
+                  leading: Icon(Icons.privacy_tip_outlined, color: accentColor),
                   title: Text(
                     settings.translate('privacy_policy'),
                     style: TextStyle(

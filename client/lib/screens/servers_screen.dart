@@ -14,6 +14,9 @@ class ServersScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = settings.isDarkMode;
 
+    final accentColor = isDark ? Colors.cyanAccent : const Color(0xFF2563EB);
+    final accentColorMuted = isDark ? Colors.cyan : const Color(0xFF3B82F6);
+
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
@@ -52,10 +55,10 @@ class ServersScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   TextButton.icon(
                     onPressed: () => provider.init(),
-                    icon: const Icon(Icons.refresh, color: Colors.cyanAccent),
+                    icon: Icon(Icons.refresh, color: accentColor),
                     label: Text(
                       settings.translate('refresh'),
-                      style: const TextStyle(color: Colors.cyanAccent),
+                      style: TextStyle(color: accentColor),
                     ),
                   ),
                 ],
@@ -78,19 +81,19 @@ class ServersScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: isSelected 
-                          ? (isDark ? const Color(0xFF1E1E2F) : Colors.cyan.withValues(alpha: 0.1)) 
+                          ? (isDark ? const Color(0xFF1E1E2F) : accentColorMuted.withValues(alpha: 0.1)) 
                           : theme.cardColor,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: isSelected 
-                            ? Colors.cyanAccent 
+                            ? accentColor 
                             : (isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05)),
                         width: 1.5,
                       ),
                       boxShadow: isSelected
                           ? [
                               BoxShadow(
-                                color: Colors.cyanAccent.withValues(alpha: 0.1),
+                                color: accentColor.withValues(alpha: 0.1),
                                 blurRadius: 10,
                                 spreadRadius: 1,
                               )
@@ -104,13 +107,13 @@ class ServersScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: isSelected 
-                                ? Colors.cyanAccent.withValues(alpha: 0.15) 
+                                ? accentColor.withValues(alpha: 0.15) 
                                 : (isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05)),
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
                             Icons.dns_outlined,
-                            color: isSelected ? Colors.cyanAccent : (isDark ? Colors.white70 : Colors.black54),
+                            color: isSelected ? accentColor : (isDark ? Colors.white70 : Colors.black54),
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -140,9 +143,9 @@ class ServersScreen extends StatelessWidget {
                         ),
                         // Checkmark/Selection indicator
                         if (isSelected)
-                          const Icon(
+                          Icon(
                             Icons.check_circle,
-                            color: Colors.cyanAccent,
+                            color: accentColor,
                           )
                         else
                           Icon(
