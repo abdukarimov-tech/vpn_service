@@ -1,27 +1,37 @@
-version: '3.8'
-
 services:
+  vpn-db:
+    image: postgres:16-alpine
+    container_name: vpn-db
+    environment:
+      - POSTGRES_USER=vpn
+      - POSTGRES_PASSWORD=vpn_secret_2026
+      - POSTGRES_DB=vpn_service
+    volumes:
+      - vpn_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vpn -d vpn_service"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
   vpn-api:
     build: .
     container_name: vpn-api
     ports:
       - "8080:8080"
-    volumes:
-      - ./xray:/app/xray
-      - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - DB_HOST=host.docker.internal
+      - DB_HOST=vpn-db
       - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
+      - DB_USER=vpn
+      - DB_PASSWORD=vpn_secret_2026
       - DB_NAME=vpn_service
       - DB_SSLMODE=disable
-      - XRAY_CONTAINER_NAME=xray
-      - XRAY_CONFIG_PATH=/app/xray/config.json
-      - XRAY_TEMPLATE_PATH=/app/xray/config.template.json
       - PORT=8080
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - NODE_AGENT_TOKEN=kzAlm4ty_9f3B7dQ2xR8sV1nT6wY0pL
+    depends_on:
+      vpn-db:
+        condition: service_healthy
     restart: always
 
   xray:
@@ -31,5 +41,30 @@ services:
       - "8443:8443"
     volumes:
       - ./xray:/etc/xray
-    command: xray -config /etc/xray/config.json
+    command: run -config /etc/xray/config.json
     restart: always
+
+  # Local node agent: syncs this host's Xray with the control plane.
+  vpn-agent:
+    build: ../agent
+    container_name: vpn-agent
+    environment:
+      - API_URL=http://vpn-api:8080
+      - NODE_AGENT_TOKEN=kzAlm4ty_9f3B7dQ2xR8sV1nT6wY0pL
+      - NODE_NAME=Almaty, Kazakhstan
+      - NODE_IP=92.38.48.158
+      - NODE_PORT=8443
+      - NODE_SNI=images.apple.com
+      - NODE_SHORT_ID=0123456789abcdef
+      - XRAY_CONTAINER_NAME=xray
+      - XRAY_CONFIG_PATH=/app/xray/config.json
+      - XRAY_KEYS_PATH=/app/xray/keys.json
+    volumes:
+      - ./xray:/app/xray
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - vpn-api
+    restart: always
+
+volumes:
+  vpn_db_data:

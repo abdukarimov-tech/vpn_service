@@ -1,0 +1,45 @@
+# Deploy this on a NEW VPN node (a fresh VDS). It runs only Xray + the node
+# agent; the database and control-plane API stay on the central server.
+#
+# Steps:
+#   1. Copy the whole `agent/` folder to the new server.
+#   2. Edit the NODE_* values below (name, public IP) and keep NODE_AGENT_TOKEN
+#      identical to the central server's token.
+#   3. Open the VPN port in the firewall (default 8443/tcp).
+#   4. Run:  docker compose -f docker-compose.node.yml up -d --build
+#
+# The agent generates its REALITY keys, self-registers with the control plane,
+# and the new location appears in the app automatically on the next register.
+
+services:
+  xray:
+    image: ghcr.io/xtls/xray-core:latest
+    container_name: xray
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./xray:/etc/xray
+    command: run -config /etc/xray/config.json
+    restart: always
+
+  vpn-agent:
+    build: .
+    container_name: vpn-agent
+    environment:
+      # Central control-plane API (the Almaty server).
+      - API_URL=http://92.38.48.158:8080
+      - NODE_AGENT_TOKEN=kzAlm4ty_9f3B7dQ2xR8sV1nT6wY0pL
+      # ---- change these per node ----
+      - NODE_NAME=Frankfurt, Germany
+      - NODE_IP=CHANGE_ME_PUBLIC_IP
+      - NODE_PORT=8443
+      # -------------------------------
+      - NODE_SNI=images.apple.com
+      - NODE_SHORT_ID=0123456789abcdef
+      - XRAY_CONTAINER_NAME=xray
+      - XRAY_CONFIG_PATH=/app/xray/config.json
+      - XRAY_KEYS_PATH=/app/xray/keys.json
+    volumes:
+      - ./xray:/app/xray
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always

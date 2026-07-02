@@ -7,10 +7,16 @@
 ehthumbs.db
 Thumbs.db
 
+# Environment / credentials
+.env
+
 # Go / Backend secrets & binaries
 server/vpn_api
 server/xray/keys.json
 server/xray/config.json
+agent/vpn_agent
+agent/xray/keys.json
+agent/xray/config.json
 
 # Web/Node (if any)
 node_modules/

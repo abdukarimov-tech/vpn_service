@@ -20,12 +20,9 @@ class VpnProvider extends ChangeNotifier {
   String? _deviceId;
   String? _userUuid;
 
-  // Base API configuration (auto-detects emulator vs simulator)
+  // Production API server (VDS)
   String get _apiUrl {
-    if (Platform.isAndroid) {
-      return 'http://10.0.2.2:8080';
-    }
-    return 'http://localhost:8080';
+    return 'http://92.38.48.158:8080';
   }
 
   bool get isInitialized => _initialized;
@@ -143,10 +140,14 @@ class VpnProvider extends ChangeNotifier {
       _vpnState = 'CONNECTING';
       notifyListeners();
 
+      // The API returns a VLESS share link (vless://...), but the plugin needs a
+      // full V2Ray JSON config. Parse the link into a proper configuration first.
+      final V2RayURL parser = FlutterV2ray.parseFromURL(_selectedServer!.link);
+
       // Start V2Ray client tunnel
       await _v2ray.startV2Ray(
         remark: _selectedServer!.name,
-        config: _selectedServer!.link,
+        config: parser.getFullConfiguration(),
       );
 
       // Log connection to бэкенд

@@ -25,16 +25,43 @@ graph TD
 ```
 ├── .gitignore             # Root Git ignore file
 ├── README.md              # Project documentation (English & Russian)
-├── server/                # Server-side components (Go API + Xray Docker)
-│   ├── docker-compose.yml # Docker Compose orchestration for backend & Xray
-│   ├── Dockerfile         # Dockerfile for Go API
-│   ├── main.go            # Go API Server entry point
-│   ├── db.go              # PostgreSQL database initialization & helpers
-│   ├── xray_manager.go    # X25519 key generation & Xray lifecycle manager
+├── server/                # Control plane (Go API + Postgres) + local node
+│   ├── docker-compose.yml # Orchestrates db + api + xray + local node agent
+│   ├── Dockerfile         # Dockerfile for the control-plane API
+│   ├── main.go            # API: client register + node endpoints
+│   ├── db.go              # Postgres init, `vpn_users` and `servers` tables
 │   └── xray/
-│       └── config.template.json # Configuration template for Xray
+│       └── config.template.json # Xray template (used by the local node)
+├── agent/                 # Node agent — runs on EVERY VPN node next to Xray
+│   ├── main.go            # Keys + self-registration + Xray config sync loop
+│   ├── Dockerfile
+│   ├── docker-compose.node.yml # Template to deploy a NEW remote node
+│   └── xray/config.template.json
 └── client/                # Mobile client application (Flutter)
 ```
+
+## Multi-server architecture
+
+The system uses a **control plane + node agents** design:
+
+- **Control plane** (`server/`): the Go API and Postgres. Clients call `/api/register`
+  and get a list of every enabled server. It exposes token-protected endpoints
+  `POST /api/nodes/register` and `GET /api/nodes/clients` for agents.
+- **Node agent** (`agent/`): runs on every VPN node beside an Xray container.
+  It generates/keeps that node's REALITY keys, self-registers with the control
+  plane, then periodically pulls the full user list and rewrites the local
+  `config.json`, restarting Xray only when the client list changes.
+- The `servers` table stores each node (name, ip, port, public key, short id, sni).
+
+### Adding a new server (node)
+
+1. Provision a fresh VDS with Docker installed, and open the VPN port (default `8443/tcp`).
+2. Copy the `agent/` folder to the new server.
+3. In `agent/docker-compose.node.yml` set `NODE_NAME`, `NODE_IP` (public IP), and
+   keep `NODE_AGENT_TOKEN` / `API_URL` pointing at the control plane.
+4. Run: `docker compose -f docker-compose.node.yml up -d --build`.
+5. The agent generates keys, self-registers, and the new location appears in the
+   app automatically on the next `register` call — no code changes or app update needed.
 
 ---
 

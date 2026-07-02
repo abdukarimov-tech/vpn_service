@@ -30,6 +30,13 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
+
+            // R8 was stripping Room/WorkManager generated classes
+            // (androidx.work.impl.WorkDatabase_Impl), which google_mobile_ads needs
+            // at startup, causing an immediate crash. Native libs dominate APK size,
+            // so disabling code shrinking here has negligible size impact.
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 }

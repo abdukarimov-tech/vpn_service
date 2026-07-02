@@ -5,7 +5,8 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"os"
+	"net/url"
+	"strconv"
 )
 
 type RegisterRequest struct {
@@ -28,36 +29,33 @@ type ConnectRequest struct {
 	DeviceID string `json:"device_id"`
 }
 
+// NodeRegisterRequest is sent by a node agent to register/update itself.
+type NodeRegisterRequest struct {
+	Name      string `json:"name"`
+	IP        string `json:"ip"`
+	Port      int    `json:"port"`
+	PublicKey string `json:"public_key"`
+	ShortID   string `json:"short_id"`
+	SNI       string `json:"sni"`
+}
+
 func main() {
-	log.Println("Starting VPN API Server...")
+	log.Println("Starting VPN API Server (control plane)...")
 
-	// Ensure xray directory exists
-	if err := os.MkdirAll("xray", 0755); err != nil {
-		log.Fatalf("Error creating xray directory: %v", err)
-	}
-
-	// Initialize Database
 	if err := InitDB(); err != nil {
 		log.Fatalf("Database initialization failed: %v", err)
 	}
 	defer DB.Close()
 
-	// Initialize X25519 Keys
-	if err := InitKeys(); err != nil {
-		log.Fatalf("Key initialization failed: %v", err)
-	}
-
-	// Sync initial config
-	if err := SyncXrayConfig(); err != nil {
-		log.Printf("Warning: initial config sync failed: %v", err)
-	}
-
-	// Setup Routes
+	// Client-facing endpoints
 	http.HandleFunc("/api/register", handleRegister)
 	http.HandleFunc("/api/connect", handleConnect)
 	http.HandleFunc("/api/health", handleHealth)
 
-	// Start Server
+	// Node-agent endpoints (token protected)
+	http.HandleFunc("/api/nodes/register", handleNodeRegister)
+	http.HandleFunc("/api/nodes/clients", handleNodeClients)
+
 	port := getEnv("PORT", "8080")
 	log.Printf("Server running on port %s", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
@@ -79,11 +77,8 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var userUUID string
-	// Check if user already exists in PostgreSQL
 	err = DB.QueryRow("SELECT uuid FROM vpn_users WHERE device_id = $1", req.DeviceID).Scan(&userUUID)
 	if err != nil {
-		// User does not exist, create new
-		// Generate UUID using crypto/rand in a helper or standard package
 		userUUID = generateRandomUUID()
 		_, err = DB.Exec("INSERT INTO vpn_users (device_id, uuid) VALUES ($1, $2)", req.DeviceID, userUUID)
 		if err != nil {
@@ -92,33 +87,32 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		log.Printf("Registered new user: device=%s, uuid=%s", req.DeviceID, userUUID)
-
-		// Sync configuration and restart Xray container asynchronously
-		go func() {
-			if err := SyncXrayConfig(); err != nil {
-				log.Printf("Error syncing Xray configuration: %v", err)
-			}
-		}()
 	} else {
-		log.Printf("Existing user requested registration: device=%s, uuid=%s", req.DeviceID, userUUID)
+		log.Printf("Existing user requested registration: device=%s", req.DeviceID)
 	}
 
-	serverIP := getEnv("VPN_SERVER_IP", "127.0.0.1")
-	serverPort := getEnv("VPN_SERVER_PORT", "8443")
-	serverName := getEnv("VPN_SERVER_NAME", "Primary Server")
+	servers, err := GetEnabledServers()
+	if err != nil {
+		log.Printf("Error fetching servers: %v", err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
 
-	link := getVLESSLink(userUUID, serverIP, serverPort, PublicKey, serverName)
+	var serverInfos []ServerInfo
+	for _, s := range servers {
+		portStr := strconv.Itoa(s.Port)
+		link := getVLESSLink(userUUID, s)
+		serverInfos = append(serverInfos, ServerInfo{
+			Name: s.Name,
+			IP:   s.IP,
+			Port: portStr,
+			Link: link,
+		})
+	}
 
 	resp := RegisterResponse{
-		UUID: userUUID,
-		Servers: []ServerInfo{
-			{
-				Name: serverName,
-				IP:   serverIP,
-				Port: serverPort,
-				Link: link,
-			},
-		},
+		UUID:    userUUID,
+		Servers: serverInfos,
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -156,19 +150,97 @@ func handleHealth(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(`{"status":"healthy"}`))
 }
 
-func getVLESSLink(userUUID, ip, port, publicKey, serverName string) string {
-	return "vless://" + userUUID + "@" + ip + ":" + port +
-		"?security=reality&sni=images.apple.com&fp=chrome&pbk=" + publicKey +
-		"&sid=0123456789abcdef&flow=xtls-rprx-vision&type=tcp#" + serverName
+// handleNodeRegister lets a node agent register or update its details.
+func handleNodeRegister(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	if !authorizeNode(r) {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	var req NodeRegisterRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil || req.IP == "" || req.PublicKey == "" {
+		http.Error(w, "Bad request", http.StatusBadRequest)
+		return
+	}
+
+	if req.Port == 0 {
+		req.Port = 8443
+	}
+	if req.ShortID == "" {
+		req.ShortID = "0123456789abcdef"
+	}
+	if req.SNI == "" {
+		req.SNI = "images.apple.com"
+	}
+	if req.Name == "" {
+		req.Name = req.IP
+	}
+
+	err := UpsertServer(Server{
+		Name:      req.Name,
+		IP:        req.IP,
+		Port:      req.Port,
+		PublicKey: req.PublicKey,
+		ShortID:   req.ShortID,
+		SNI:       req.SNI,
+	})
+	if err != nil {
+		log.Printf("Error upserting server %s: %v", req.IP, err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	log.Printf("Node registered/updated: %s (%s:%d)", req.Name, req.IP, req.Port)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"status":"ok"}`))
+}
+
+// handleNodeClients returns all user UUIDs for node agents to sync their Xray config.
+func handleNodeClients(w http.ResponseWriter, r *http.Request) {
+	if !authorizeNode(r) {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	uuids, err := GetAllUUIDs()
+	if err != nil {
+		log.Printf("Error fetching UUIDs: %v", err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string][]string{"uuids": uuids})
+}
+
+func authorizeNode(r *http.Request) bool {
+	expected := getEnv("NODE_AGENT_TOKEN", "")
+	if expected == "" {
+		// If no token configured, deny node endpoints for safety.
+		return false
+	}
+	return r.Header.Get("Authorization") == "Bearer "+expected
+}
+
+func getVLESSLink(userUUID string, s Server) string {
+	portStr := strconv.Itoa(s.Port)
+	return "vless://" + userUUID + "@" + s.IP + ":" + portStr +
+		"?security=reality&sni=" + url.QueryEscape(s.SNI) +
+		"&fp=chrome&pbk=" + s.PublicKey +
+		"&sid=" + url.QueryEscape(s.ShortID) +
+		"&flow=xtls-rprx-vision&type=tcp#" + url.QueryEscape(s.Name)
 }
 
 // Simple RFC 4122 compliant UUID generator using crypto/rand
 func generateRandomUUID() string {
 	uuid := make([]byte, 16)
 	_, _ = rand.Read(uuid)
-	// Set version 4 (random)
 	uuid[6] = (uuid[6] & 0x0f) | 0x40
-	// Set variant (RFC 4122)
 	uuid[8] = (uuid[8] & 0x3f) | 0x80
 	return formatUUID(uuid)
 }

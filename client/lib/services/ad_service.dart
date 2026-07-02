@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdService {
@@ -9,12 +10,25 @@ class AdService {
   AdService._internal();
 
   bool _initialized = false;
-  bool useMockAds = true; // Set to false to use real Google AdMob ads
+  bool useMockAds = false; // Set to true to use the fake countdown dialog instead of AdMob
+  bool useTestAds = false; // Real (production) ad units are used; registered devices below still get test ads
+
+  // Devices registered here receive TEST ads even with production ad unit IDs
+  // (safe to click, no policy risk). Add device IDs from logcat:
+  // "Use RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("...")) to get test ads on this device."
+  static const List<String> _testDeviceIds = <String>[
+    '8583B32A0E17D4268006346FD6E40690',
+  ];
 
   Future<void> init() async {
     if (_initialized) return;
     try {
       if (!useMockAds) {
+        if (_testDeviceIds.isNotEmpty) {
+          MobileAds.instance.updateRequestConfiguration(
+            RequestConfiguration(testDeviceIds: _testDeviceIds),
+          );
+        }
         await MobileAds.instance.initialize();
       }
       _initialized = true;
@@ -23,12 +37,20 @@ class AdService {
     }
   }
 
-  // Helper to get demo Ad Unit ID
+  // Google's official test rewarded ad units. They always serve a test ad and
+  // are safe to click on any device (no policy risk).
+  static const String _androidTestRewarded = 'ca-app-pub-3940256099942544/5224354917';
+  static const String _iosTestRewarded = 'ca-app-pub-3940256099942544/1712485313';
+
+  // Your real (production) rewarded ad units.
+  static const String _androidRealRewarded = 'ca-app-pub-3676275694536393/7251475065';
+  static const String _iosRealRewarded = 'ca-app-pub-3676275694536393/7251475065'; // TODO: set a dedicated iOS unit
+
   String get _rewardedAdUnitId {
     if (Platform.isAndroid) {
-      return 'ca-app-pub-3676275694536393/7251475065'; // Real Android Rewarded Ad Unit ID
+      return useTestAds ? _androidTestRewarded : _androidRealRewarded;
     } else if (Platform.isIOS) {
-      return 'ca-app-pub-3940256099942544/1712485313'; // iOS Test Rewarded Ad Unit ID
+      return useTestAds ? _iosTestRewarded : _iosRealRewarded;
     }
     return '';
   }
@@ -39,6 +61,14 @@ class AdService {
       return await _showMockAd(context);
     }
     return await _showAdMobRewardedAd(context);
+  }
+
+  void _hideSystemBars() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  }
+
+  void _restoreSystemBars() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
 
   // Simulates ad viewing with a beautiful interactive progress dialog
@@ -153,25 +183,36 @@ class AdService {
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (ad) {
           Navigator.of(context).pop(); // Dismiss loading spinner
-          
+
+          // Track the reward separately from dismissal. The reward fires while
+          // the ad is still on screen, so we must NOT restore the system bars
+          // (or complete) until the ad is actually closed - otherwise the status
+          // bar reappears over the ad content.
+          bool rewardEarned = false;
+
           ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdShowedFullScreenContent: (ad) {
+              _hideSystemBars();
+            },
             onAdDismissedFullScreenContent: (ad) {
+              _restoreSystemBars();
               ad.dispose();
               if (!completer.isCompleted) {
-                completer.complete(false); // User closed ad early or failed
+                completer.complete(rewardEarned);
               }
             },
             onAdFailedToShowFullScreenContent: (ad, error) {
+              _restoreSystemBars();
               ad.dispose();
-              completer.complete(true); // Fallback: allow connection if ad fails to show
+              if (!completer.isCompleted) {
+                completer.complete(true); // Fallback: allow connection if ad fails to show
+              }
             },
           );
 
           ad.show(
             onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
-              if (!completer.isCompleted) {
-                completer.complete(true); // Reward earned!
-              }
+              rewardEarned = true; // Marked; connection happens once the ad closes
             },
           );
         },
