@@ -1,4 +1,94 @@
-# VPN-сервис на основе Xray (VLESS + REALITY)
+# VPN Service based on Xray (VLESS + REALITY)
+
+This repository contains the complete source code for creating a cross-platform VPN service (iOS and Android client built with Flutter, Go-based backend API with PostgreSQL 16 database, and secure tunnel core using Xray).
+
+---
+
+## System Architecture
+
+```mermaid
+graph TD
+    Client[Flutter Mobile App] -->|API Requests| Backend[Go API Server]
+    Client -->|VLESS VPN Tunnel| Xray[Xray VLESS REALITY Container]
+    Backend -->|Users| DB[(PostgreSQL 16)]
+    Backend -->|Config Sync & Restart| Xray
+```
+
+1. **Mobile Client (Flutter):** Integrates the Xray core at the system level using the `flutter_v2ray` plugin. The user interface requires watching a rewarded video ad before connecting (client-side enforcement). Once the ad is viewed, the VPN tunnel starts without any session time limits.
+2. **Backend (Go):** Handles unique device registration, assigns VLESS UUIDs, logs connections, and dynamically updates Xray's `config.json` configuration file.
+3. **VPN Core (Xray):** Provides high-performance, stealthy VPN connections using the VLESS protocol with REALITY XTLS Vision camouflage, mimicking legitimate websites (like `images.apple.com`).
+
+---
+
+## Repository Structure
+
+```
+├── .gitignore             # Root Git ignore file
+├── README.md              # Project documentation (English & Russian)
+├── server/                # Server-side components (Go API + Xray Docker)
+│   ├── docker-compose.yml # Docker Compose orchestration for backend & Xray
+│   ├── Dockerfile         # Dockerfile for Go API
+│   ├── main.go            # Go API Server entry point
+│   ├── db.go              # PostgreSQL database initialization & helpers
+│   ├── xray_manager.go    # X25519 key generation & Xray lifecycle manager
+│   └── xray/
+│       └── config.template.json # Configuration template for Xray
+└── client/                # Mobile client application (Flutter)
+```
+
+---
+
+## Running the Server
+
+### Requirements
+- Docker and Docker Compose installed.
+- Access to a PostgreSQL 16 database.
+
+### Deployment Instructions
+1. Navigate to the `server/` directory:
+   ```bash
+   cd server
+   ```
+2. Configure the environment variables in `docker-compose.yml` (under the `environment` section of the `vpn-api` service):
+   - `DB_HOST`: PostgreSQL database host (e.g. `host.docker.internal` or your server's IP).
+   - `DB_PORT`: PostgreSQL port (default: `5432`).
+   - `DB_USER`: Database username.
+   - `DB_PASSWORD`: Database password.
+   - `DB_NAME`: Database name (e.g., `vpn_service`).
+   - `VPN_SERVER_IP`: Public IP address of your server (VDS).
+   - `VPN_SERVER_PORT`: Port for the Xray service (default: `8443`).
+   - `VPN_SERVER_NAME`: Location name displayed in the client app (e.g., "Germany").
+3. Start the containers:
+   ```bash
+   docker-compose up -d --build
+   ```
+4. The backend will automatically create tables in PostgreSQL, generate X25519 keys for REALITY (saved in `server/xray/keys.json`), and write the final `config.json` for Xray.
+
+---
+
+## Running the Mobile Application (Flutter)
+
+### Requirements
+- Flutter SDK (version 3.12.x or newer).
+- Configured Xcode (for iOS) and Android Studio / SDK (for Android).
+
+### Running Instructions
+1. Navigate to the `client/` directory and update the API URL constant in `lib/providers/vpn_provider.dart` (`_apiUrl`):
+   - For Android Emulator tests, use `http://10.0.2.2:8080`.
+   - For iOS Simulator tests, use `http://localhost:8080`.
+   - For production, specify your API server domain or public IP.
+2. Fetch dependencies:
+   ```bash
+   flutter pub get
+   ```
+3. Run the application:
+   ```bash
+   flutter run
+   ```
+
+---
+
+# VPN-сервис на основе Xray (VLESS + REALITY) (Russian Version)
 
 Этот репозиторий содержит полный исходный код для создания кроссплатформенного VPN-сервиса (клиент для iOS и Android на Flutter, бэкенд API на Go с базой данных PostgreSQL 16 и туннель безопасности на основе Xray).
 
