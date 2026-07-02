@@ -26,7 +26,7 @@ class AdService {
   // Helper to get demo Ad Unit ID
   String get _rewardedAdUnitId {
     if (Platform.isAndroid) {
-      return 'ca-app-pub-3940256099942544/5224354917'; // Android Test Rewarded Ad Unit ID
+      return 'ca-app-pub-3676275694536393/7251475065'; // Real Android Rewarded Ad Unit ID
     } else if (Platform.isIOS) {
       return 'ca-app-pub-3940256099942544/1712485313'; // iOS Test Rewarded Ad Unit ID
     }
