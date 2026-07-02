@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  vpn-api:
+    build: .
+    container_name: vpn-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./xray:/app/xray
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DB_HOST=host.docker.internal
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=vpn_service
+      - DB_SSLMODE=disable
+      - XRAY_CONTAINER_NAME=xray
+      - XRAY_CONFIG_PATH=/app/xray/config.json
+      - XRAY_TEMPLATE_PATH=/app/xray/config.template.json
+      - PORT=8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always
+
+  xray:
+    image: ghcr.io/xtls/xray-core:latest
+    container_name: xray
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./xray:/etc/xray
+    command: xray -config /etc/xray/config.json
+    restart: always
