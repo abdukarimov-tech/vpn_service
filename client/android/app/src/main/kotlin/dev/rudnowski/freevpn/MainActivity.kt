@@ -1,4 +1,4 @@
-package com.vpnservice.client
+package dev.rudnowski.freevpn
 
 import io.flutter.embedding.android.FlutterActivity
 
