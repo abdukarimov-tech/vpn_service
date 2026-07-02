@@ -6,12 +6,13 @@ class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   void _showInfoDialog(BuildContext context, String title, String content, String closeText) {
+    final settings = Provider.of<SettingsProvider>(context, listen: false);
+    final isDark = settings.isDarkMode;
+    final accentColor = isDark ? Colors.cyanAccent : const Color(0xFF2563EB);
+
     showDialog(
       context: context,
       builder: (context) {
-        final theme = Theme.of(context);
-        final isDark = theme.brightness == Brightness.dark;
-
         return AlertDialog(
           backgroundColor: isDark ? const Color(0xFF1E1E2F) : Colors.white,
           shape: RoundedRectangleBorder(
@@ -41,8 +42,8 @@ class SettingsScreen extends StatelessWidget {
               onPressed: () => Navigator.of(context).pop(),
               child: Text(
                 closeText,
-                style: const TextStyle(
-                  color: Colors.cyanAccent,
+                style: TextStyle(
+                  color: accentColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -84,6 +85,7 @@ class SettingsScreen extends StatelessWidget {
         children: [
           // Theme Tile
           _buildSettingsSection(
+            context,
             settings.translate('theme'),
             [
               _buildSettingsCard(
@@ -120,6 +122,7 @@ class SettingsScreen extends StatelessWidget {
 
           // Language Tile
           _buildSettingsSection(
+            context,
             settings.translate('language'),
             [
               _buildSettingsCard(
@@ -162,6 +165,7 @@ class SettingsScreen extends StatelessWidget {
 
           // About & Privacy Policy Tiles
           _buildSettingsSection(
+            context,
             settings.translate('about'),
             [
               _buildSettingsCard(
@@ -212,7 +216,11 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSettingsSection(String title, List<Widget> children) {
+  Widget _buildSettingsSection(BuildContext context, String title, List<Widget> children) {
+    final settings = Provider.of<SettingsProvider>(context, listen: false);
+    final isDark = settings.isDarkMode;
+    final accentColor = isDark ? Colors.cyanAccent : const Color(0xFF2563EB);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -220,8 +228,8 @@ class SettingsScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8, bottom: 8),
           child: Text(
             title.toUpperCase(),
-            style: const TextStyle(
-              color: Colors.cyanAccent,
+            style: TextStyle(
+              color: accentColor,
               fontWeight: FontWeight.bold,
               letterSpacing: 1.2,
               fontSize: 12,
@@ -236,12 +244,7 @@ class SettingsScreen extends StatelessWidget {
   Widget _buildSettingsCard({required bool isDark, required Widget child}) {
     return Container(
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF161626) : Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05),
-          width: 1,
-        ),
         boxShadow: isDark
             ? []
             : [
@@ -252,7 +255,19 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ],
       ),
-      child: child,
+      child: Material(
+        color: isDark ? const Color(0xFF161626) : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(
+            color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05),
+            width: 1,
+          ),
+        ),
+        child: child,
+      ),
     );
   }
 }
