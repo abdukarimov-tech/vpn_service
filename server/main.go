@@ -57,6 +57,10 @@ func main() {
 	http.HandleFunc("/api/nodes/register", handleNodeRegister)
 	http.HandleFunc("/api/nodes/clients", handleNodeClients)
 
+	// Admin dashboard (token protected)
+	http.HandleFunc("/admin", handleAdmin)
+	http.HandleFunc("/api/stats", handleStats)
+
 	port := getEnv("PORT", "8080")
 	log.Printf("Server running on port %s", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
