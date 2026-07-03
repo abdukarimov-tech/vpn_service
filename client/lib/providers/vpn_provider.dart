@@ -28,9 +28,12 @@ class VpnProvider extends ChangeNotifier {
   String? _deviceId;
   String? _userUuid;
 
-  // Production API server (VDS)
+  // Production API server (VDS). Served over HTTPS by reusing the existing
+  // calktalk.rudnowski.dev certificate: a reverse proxy maps the `/vpn` path
+  // prefix to the Go control plane on 127.0.0.1:8080 (the `/vpn` prefix is
+  // stripped by the proxy, so requests hit /api/... on the backend).
   String get _apiUrl {
-    return 'http://92.38.48.158:8080';
+    return 'https://calktalk.rudnowski.dev/vpn';
   }
 
   bool get isInitialized => _initialized;
