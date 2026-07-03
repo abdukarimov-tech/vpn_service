@@ -1,7 +1,7 @@
 <!--
   Политика конфиденциальности Barys VPN (двуязычная: RU / EN).
   Перед публикацией заполните плейсхолдеры в квадратных скобках:
-  [ДАТА], [НАЗВАНИЕ КОМПАНИИ/РАЗРАБОТЧИКА], [EMAIL ПОДДЕРЖКИ], [ДОМЕН САЙТА].
+  [ДАТА], [НАЗВАНИЕ КОМПАНИИ/РАЗРАБОТЧИКА], support@rudnowski.dev, [ДОМЕН САЙТА].
   Один и тот же URL этой страницы указывается в App Store Connect и Google Play Console.
 -->
 
@@ -9,7 +9,7 @@
 
 **Дата вступления в силу:** [ДАТА]
 **Разработчик:** [НАЗВАНИЕ КОМПАНИИ/РАЗРАБОТЧИКА]
-**Контакт:** [EMAIL ПОДДЕРЖКИ]
+**Контакт:** support@rudnowski.dev
 
 Настоящая Политика конфиденциальности описывает, какие данные обрабатываются при использовании мобильного приложения **Barys VPN** (далее — «Приложение») для Android и iOS.
 
@@ -60,7 +60,7 @@
 
 В зависимости от вашей юрисдикции (например, GDPR в ЕС) вы можете иметь право на доступ, исправление или удаление данных, а также на отзыв согласия. Вы можете сбросить или ограничить рекламный идентификатор в настройках устройства.
 
-**Как удалить свои данные.** Чтобы удалить связанные с вашим устройством данные (идентификатор устройства и выданный сервером UUID), напишите на [EMAIL ПОДДЕРЖКИ] с темой «Удаление данных». Мы удалим соответствующую запись из нашей базы данных. Обратите внимание: рекламные данные обрабатываются Google AdMob согласно политике Google; сбросить рекламный идентификатор можно в настройках устройства.
+**Как удалить свои данные.** Чтобы удалить связанные с вашим устройством данные (идентификатор устройства и выданный сервером UUID), напишите на support@rudnowski.dev с темой «Удаление данных». Мы удалим соответствующую запись из нашей базы данных. Обратите внимание: рекламные данные обрабатываются Google AdMob согласно политике Google; сбросить рекламный идентификатор можно в настройках устройства.
 
 ## 10. Изменения политики
 
@@ -68,7 +68,7 @@
 
 ## 11. Контакты
 
-По вопросам конфиденциальности: [EMAIL ПОДДЕРЖКИ].
+По вопросам конфиденциальности: support@rudnowski.dev.
 
 ---
 
@@ -76,7 +76,7 @@
 
 **Effective date:** [DATE]
 **Developer:** [COMPANY/DEVELOPER NAME]
-**Contact:** [SUPPORT EMAIL]
+**Contact:** support@rudnowski.dev
 
 This Privacy Policy explains what data is processed when you use the **Barys VPN** mobile application (the “App”) for Android and iOS.
 
@@ -127,7 +127,7 @@ The App is not intended for children under 13 (or the age set by your local law)
 
 Depending on your jurisdiction (e.g., GDPR in the EU), you may have the right to access, correct, or delete your data, and to withdraw consent. You can reset or limit your advertising identifier in your device settings.
 
-**How to delete your data.** To delete the data associated with your device (the device identifier and the server-issued UUID), email [SUPPORT EMAIL] with the subject “Data deletion”. We will remove the corresponding record from our database. Note: advertising data is processed by Google AdMob under Google’s policy; you can reset your advertising identifier in your device settings.
+**How to delete your data.** To delete the data associated with your device (the device identifier and the server-issued UUID), email support@rudnowski.dev with the subject “Data deletion”. We will remove the corresponding record from our database. Note: advertising data is processed by Google AdMob under Google’s policy; you can reset your advertising identifier in your device settings.
 
 ## 10. Changes to This Policy
 
@@ -135,4 +135,4 @@ We may update this Policy. The current version is always available at [WEBSITE D
 
 ## 11. Contact
 
-For privacy inquiries: [SUPPORT EMAIL].
+For privacy inquiries: support@rudnowski.dev.
