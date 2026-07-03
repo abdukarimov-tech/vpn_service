@@ -61,15 +61,32 @@ class SingBoxConfig {
       outbound['tls'] = tls;
     }
 
+    // NOTE: This targets the sing-box 1.12+/1.13 schema (the vendored Libbox is
+    // sing-box 1.13.x). Compared to older configs:
+    //  - the `dns` outbound was REMOVED in 1.13 -> DNS is hijacked via a route
+    //    action (`hijack-dns`) instead of routed to a `dns-out` outbound;
+    //  - DNS servers use the typed format (`type` + `server`) instead of the
+    //    legacy `address` string;
+    //  - sniffing is a route action instead of an inbound flag;
+    //  - outbound server domains are resolved via `default_domain_resolver`.
     final config = <String, dynamic>{
       'log': {'level': 'warn', 'timestamp': true},
       'dns': {
         'servers': [
-          {'tag': 'proxy-dns', 'address': 'tls://1.1.1.1', 'detour': 'proxy'},
-          {'tag': 'local-dns', 'address': '223.5.5.5', 'detour': 'direct'},
-        ],
-        'rules': [
-          {'outbound': 'any', 'server': 'local-dns'},
+          {
+            'tag': 'proxy-dns',
+            'type': 'tls',
+            'server': '1.1.1.1',
+            'detour': 'proxy',
+          },
+          {
+            // No `detour` here: in sing-box 1.13 pointing a DNS server's detour
+            // at a plain (empty) `direct` outbound is rejected. Local DNS is
+            // resolved through the default (direct) path automatically.
+            'tag': 'local-dns',
+            'type': 'udp',
+            'server': '223.5.5.5',
+          },
         ],
         'final': 'proxy-dns',
         'strategy': 'prefer_ipv4',
@@ -83,22 +100,21 @@ class SingBoxConfig {
           'auto_route': true,
           'strict_route': true,
           'stack': 'gvisor',
-          'sniff': true,
-          'sniff_override_destination': true,
         },
       ],
       'outbounds': [
         outbound,
         {'type': 'direct', 'tag': 'direct'},
-        {'type': 'dns', 'tag': 'dns-out'},
       ],
       'route': {
         'rules': [
-          {'protocol': 'dns', 'outbound': 'dns-out'},
+          {'action': 'sniff'},
+          {'protocol': 'dns', 'action': 'hijack-dns'},
           {'ip_is_private': true, 'outbound': 'direct'},
         ],
         'final': 'proxy',
         'auto_detect_interface': true,
+        'default_domain_resolver': 'local-dns',
       },
     };
 

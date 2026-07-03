@@ -13,7 +13,7 @@ class AdService {
 
   bool _initialized = false;
   bool useMockAds = false; // Set to true to use the fake countdown dialog instead of AdMob
-  bool useTestAds = true; // TEMP: test ad units always fill so the ad flow can be verified. Set to false for production.
+  bool useTestAds = false; // Production: serve real rewarded ads. Registered test devices (_testDeviceIds) still get test ads.
 
   // Devices registered here receive TEST ads even with production ad unit IDs
   // (safe to click, no policy risk). Add device IDs from logcat:

@@ -21,6 +21,7 @@ class VpnProvider extends ChangeNotifier {
   bool _isLoading = false;
   String _vpnState = 'DISCONNECTED';
   String _vpnDuration = '00:00:00';
+  String? _lastConnectError;
 
   List<ServerModel> _servers = [];
   ServerModel? _selectedServer;
@@ -37,6 +38,7 @@ class VpnProvider extends ChangeNotifier {
   String get vpnState => _vpnState;
   String get vpnDuration => _vpnDuration;
   bool get isConnected => _vpnState == 'CONNECTED';
+  String? get lastConnectError => _lastConnectError;
   List<ServerModel> get servers => _servers;
   ServerModel? get selectedServer => _selectedServer;
 
@@ -223,6 +225,7 @@ class VpnProvider extends ChangeNotifier {
 
   Future<void> _connectIOS() async {
     try {
+      _lastConnectError = null;
       _vpnState = 'CONNECTING';
       notifyListeners();
 
@@ -230,16 +233,37 @@ class VpnProvider extends ChangeNotifier {
       final config = SingBoxConfig.fromVlessLink(_selectedServer!.link);
       final ok = await _singBox.connect(config);
       if (!ok) {
+        await _reportIOSConnectError();
         _vpnState = 'DISCONNECTED';
         notifyListeners();
         return;
       }
-      // Final state arrives via the status stream; log the attempt.
+      // The tunnel can still fail asynchronously inside the Network Extension
+      // (e.g. bad config). Give it a few seconds and, if it didn't reach the
+      // connected state, surface the real error from the extension.
       _logConnection();
+      Future.delayed(const Duration(seconds: 6), () async {
+        if (_vpnState != 'CONNECTED') {
+          await _reportIOSConnectError();
+          notifyListeners();
+        }
+      });
     } catch (e) {
       debugPrint("sing-box start error: $e");
       _vpnState = 'DISCONNECTED';
       notifyListeners();
+    }
+  }
+
+  Future<void> _reportIOSConnectError() async {
+    try {
+      final err = await _singBox.getLastError();
+      if (err != null && err.isNotEmpty) {
+        _lastConnectError = err;
+        debugPrint("sing-box connect failed: $err");
+      }
+    } catch (e) {
+      debugPrint("Failed to fetch sing-box last error: $e");
     }
   }
 

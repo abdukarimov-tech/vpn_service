@@ -59,6 +59,12 @@ abstract class SingBoxPlatform extends PlatformInterface {
     throw UnimplementedError('getConnectionStatus() has not been implemented.');
   }
 
+  /// Get the last connection/startup error, if any (iOS only).
+  /// Returns null when there is no recorded error.
+  Future<String?> getLastError() {
+    throw UnimplementedError('getLastError() has not been implemented.');
+  }
+
   /// Get current connection statistics
   Future<SingBoxConnectionStats> getConnectionStats() {
     throw UnimplementedError('getConnectionStats() has not been implemented.');

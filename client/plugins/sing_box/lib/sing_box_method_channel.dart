@@ -70,6 +70,16 @@ class MethodChannelSingBox extends SingBoxPlatform {
   }
 
   @override
+  Future<String?> getLastError() async {
+    try {
+      return await methodChannel.invokeMethod<String>('getLastError');
+    } catch (e) {
+      debugPrint('Error getting last error: $e');
+      return null;
+    }
+  }
+
+  @override
   Future<SingBoxConnectionStatus> getConnectionStatus() async {
     try {
       final statusString = await methodChannel.invokeMethod<String>('getConnectionStatus');

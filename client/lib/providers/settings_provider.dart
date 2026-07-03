@@ -45,7 +45,7 @@ class SettingsProvider with ChangeNotifier {
   static const Map<String, Map<String, String>> _localizedValues = {
     'ru': {
       'title': 'Barys VPN',
-      'secured': 'ЗАЩИЩЕНО',
+      'secured': 'ПОДКЛЮЧЕНО',
       'connecting': 'ПОДКЛЮЧЕНИЕ...',
       'disconnected': 'ОТКЛЮЧЕНО',
       'protocol': 'ПРОТОКОЛ',

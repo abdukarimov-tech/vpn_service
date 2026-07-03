@@ -371,6 +371,25 @@ public class SingBoxPlugin: NSObject, FlutterPlugin {
                     }
                 }
             }
+        case "getLastError":
+            Task {
+                var messages: [String] = []
+                if let groupDefaults = UserDefaults(suiteName: FilePath.groupName),
+                   let stored = groupDefaults.string(forKey: "sing_box_last_error"), !stored.isEmpty {
+                    messages.append(stored)
+                }
+                if #available(iOS 16.0, *), let profile = extensionProfile {
+                    do {
+                        try await profile.fetchLastDisconnectError()
+                    } catch {
+                        messages.append(error.localizedDescription)
+                    }
+                }
+                let combined = messages.joined(separator: " | ")
+                await MainActor.run {
+                    result(combined.isEmpty ? NSNull() : combined)
+                }
+            }
         case "getConnectionStatus":
             result(currentStatus)
         case "getConnectionStats":

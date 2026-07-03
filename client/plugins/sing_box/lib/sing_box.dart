@@ -157,6 +157,12 @@ class SingBox {
     }
   }
 
+  /// Get the last connection/startup error, if any (iOS only).
+  /// Returns null when there is no recorded error.
+  Future<String?> getLastError() {
+    return SingBoxPlatform.instance.getLastError();
+  }
+
   /// Get current connection status
   Future<SingBoxConnectionStatus> getConnectionStatus() async {
     try {

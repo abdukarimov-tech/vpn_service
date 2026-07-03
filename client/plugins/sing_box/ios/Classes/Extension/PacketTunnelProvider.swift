@@ -10,6 +10,20 @@ open class ExtensionProvider: NEPacketTunnelProvider {
     private var platformInterface: ExtensionPlatformInterface?
     
     override open func startTunnel(options: [String: NSObject]?) async throws {
+        // Clear any stale startup error and surface new ones to the app via the
+        // shared App Group so the Flutter side can display why a connect failed.
+        UserDefaults(suiteName: FilePath.groupName)?.removeObject(forKey: "sing_box_last_error")
+        do {
+            try await startTunnelInner(options: options)
+        } catch {
+            let message = "\(error.localizedDescription)"
+            UserDefaults(suiteName: FilePath.groupName)?.set(message, forKey: "sing_box_last_error")
+            NSLog("PacketTunnel startTunnel failed: \(message)")
+            throw error
+        }
+    }
+
+    private func startTunnelInner(options _: [String: NSObject]?) async throws {
         let setupOptions = LibboxSetupOptions()
         setupOptions.basePath = FilePath.sharedDirectory.relativePath
         setupOptions.workingPath = FilePath.workingDirectory.relativePath

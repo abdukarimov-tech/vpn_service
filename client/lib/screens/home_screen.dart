@@ -62,21 +62,41 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         return;
       }
 
-      // Tell the user we're connecting in the background while they watch the ad.
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(settings.translate('connecting_ad_message')),
-          duration: const Duration(seconds: 4),
-        ),
-      );
+      // Rewarded flow: the user must watch the ad first, and only then do we
+      // start the VPN connection.
+      final rewardEarned = await AdService().showAd(context);
+      if (!mounted) return;
+      if (!rewardEarned) {
+        // Ad was dismissed before the reward was granted - do not connect.
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(settings.translate('ad_warning')),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+        return;
+      }
 
-      // Start connecting and show the ad at the same time.
-      final connectFuture = provider.connect();
-      await AdService().showAd(context);
-      await connectFuture;
+      // Ad watched - now connect. The provider moves to CONNECTING and the UI
+      // reflects the state automatically.
+      await provider.connect();
       if (!mounted) return;
       if (provider.isConnected) {
         _pulseController.repeat(reverse: true);
+      }
+      // The iOS tunnel can fail asynchronously; wait for the provider to report
+      // the real error from the Network Extension and show it to the user.
+      await Future.delayed(const Duration(seconds: 7));
+      if (!mounted) return;
+      final err = provider.lastConnectError;
+      if (err != null && err.isNotEmpty && !provider.isConnected) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('VPN error: $err'),
+            backgroundColor: Colors.redAccent,
+            duration: const Duration(seconds: 12),
+          ),
+        );
       }
     }
   }
