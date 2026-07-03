@@ -56,9 +56,11 @@
 
 Приложение не предназначено для детей младше 13 лет (или иного возраста, установленного вашим законодательством). Мы сознательно не собираем данные детей.
 
-## 9. Ваши права
+## 9. Ваши права и удаление данных
 
-В зависимости от вашей юрисдикции (например, GDPR в ЕС) вы можете иметь право на доступ, исправление или удаление данных, а также на отзыв согласия. Вы можете сбросить или ограничить рекламный идентификатор в настройках устройства. Для запросов пишите на [EMAIL ПОДДЕРЖКИ].
+В зависимости от вашей юрисдикции (например, GDPR в ЕС) вы можете иметь право на доступ, исправление или удаление данных, а также на отзыв согласия. Вы можете сбросить или ограничить рекламный идентификатор в настройках устройства.
+
+**Как удалить свои данные.** Чтобы удалить связанные с вашим устройством данные (идентификатор устройства и выданный сервером UUID), напишите на [EMAIL ПОДДЕРЖКИ] с темой «Удаление данных». Мы удалим соответствующую запись из нашей базы данных. Обратите внимание: рекламные данные обрабатываются Google AdMob согласно политике Google; сбросить рекламный идентификатор можно в настройках устройства.
 
 ## 10. Изменения политики
 
@@ -121,9 +123,11 @@ Connections are protected with modern encryption protocols (VLESS Reality). We a
 
 The App is not intended for children under 13 (or the age set by your local law). We do not knowingly collect data from children.
 
-## 9. Your Rights
+## 9. Your Rights and Data Deletion
 
-Depending on your jurisdiction (e.g., GDPR in the EU), you may have the right to access, correct, or delete your data, and to withdraw consent. You can reset or limit your advertising identifier in your device settings. For requests, contact [SUPPORT EMAIL].
+Depending on your jurisdiction (e.g., GDPR in the EU), you may have the right to access, correct, or delete your data, and to withdraw consent. You can reset or limit your advertising identifier in your device settings.
+
+**How to delete your data.** To delete the data associated with your device (the device identifier and the server-issued UUID), email [SUPPORT EMAIL] with the subject “Data deletion”. We will remove the corresponding record from our database. Note: advertising data is processed by Google AdMob under Google’s policy; you can reset your advertising identifier in your device settings.
 
 ## 10. Changes to This Policy
 

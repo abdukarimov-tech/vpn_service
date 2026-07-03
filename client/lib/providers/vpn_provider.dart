@@ -16,6 +16,7 @@ class VpnProvider extends ChangeNotifier {
   // iOS VPN core (sing-box via Network Extension).
   final SingBox _singBox = SingBox.instance;
   StreamSubscription<SingBoxConnectionStatus>? _singBoxStatusSub;
+  StreamSubscription<SingBoxConnectionStats>? _singBoxStatsSub;
 
   bool _initialized = false;
   bool _isLoading = false;
@@ -74,7 +75,20 @@ class VpnProvider extends ChangeNotifier {
         await _singBox.initialize();
         _singBoxStatusSub ??= _singBox.watchSingBoxConnectionStatus().listen((status) {
           _vpnState = _mapSingBoxStatus(status);
+          // Reset the timer display as soon as we leave the connected state;
+          // while connected the duration comes from the stats stream below.
+          if (_vpnState != 'CONNECTED') {
+            _vpnDuration = '00:00:00';
+          }
           notifyListeners();
+        });
+        // iOS duration/stats arrive on a separate stream (unlike Android, where
+        // flutter_v2ray reports duration in its status callback).
+        _singBoxStatsSub ??= _singBox.watchSingBoxConnectionStats().listen((stats) {
+          if (_vpnState == 'CONNECTED') {
+            _vpnDuration = _formatDuration(stats.connectionDuration);
+            notifyListeners();
+          }
         });
       } else {
         await _v2ray.initializeV2Ray();
@@ -282,6 +296,15 @@ class VpnProvider extends ChangeNotifier {
     }
   }
 
+  /// Formats a duration given in milliseconds into HH:MM:SS.
+  String _formatDuration(int milliseconds) {
+    final totalSeconds = (milliseconds ~/ 1000).clamp(0, 359999);
+    final h = (totalSeconds ~/ 3600).toString().padLeft(2, '0');
+    final m = ((totalSeconds % 3600) ~/ 60).toString().padLeft(2, '0');
+    final s = (totalSeconds % 60).toString().padLeft(2, '0');
+    return '$h:$m:$s';
+  }
+
   String _mapSingBoxStatus(SingBoxConnectionStatus status) {
     switch (status) {
       case SingBoxConnectionStatus.connected:
@@ -301,6 +324,7 @@ class VpnProvider extends ChangeNotifier {
   @override
   void dispose() {
     _singBoxStatusSub?.cancel();
+    _singBoxStatsSub?.cancel();
     super.dispose();
   }
 
