@@ -10,11 +10,33 @@
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
+		66EBF9F12FDBABDFFEF870F8 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBD03F9E3CBFE18D9ADFD060 /* Pods_Runner.framework */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		7884E8682EC3CC0700C636F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7884E8672EC3CC0400C636F2 /* SceneDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		B113BB5256C9F1D147D8C7CD /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9EDDCE6142959B5A545EBE1 /* Pods_RunnerTests.framework */; };
+		FBE719CB2FF7B04400E0A88E /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBE719CA2FF7B04400E0A88E /* NetworkExtension.framework */; };
+		FBE719D32FF7B04400E0A88E /* SingBoxExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FBE719C92FF7B04400E0A88E /* SingBoxExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FBE71A322FF7B4A100E0A88E /* BypassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A212FF7B4A100E0A88E /* BypassManager.swift */; };
+		FBE71A332FF7B4A100E0A88E /* ServerConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A232FF7B4A100E0A88E /* ServerConfigManager.swift */; };
+		FBE71A342FF7B4A100E0A88E /* NEVPNStatus+isConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A2C2FF7B4A100E0A88E /* NEVPNStatus+isConnected.swift */; };
+		FBE71A352FF7B4A100E0A88E /* BlockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A202FF7B4A100E0A88E /* BlockManager.swift */; };
+		FBE71A362FF7B4A100E0A88E /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A242FF7B4A100E0A88E /* SettingsManager.swift */; };
+		FBE71A372FF7B4A100E0A88E /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A1B2FF7B4A100E0A88E /* Database.swift */; };
+		FBE71A382FF7B4A100E0A88E /* ExtensionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A2B2FF7B4A100E0A88E /* ExtensionProfile.swift */; };
+		FBE71A392FF7B4A100E0A88E /* Extension+Iterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A272FF7B4A100E0A88E /* Extension+Iterator.swift */; };
+		FBE71A3A2FF7B4A100E0A88E /* Extension+RunBlocking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A282FF7B4A100E0A88E /* Extension+RunBlocking.swift */; };
+		FBE71A3B2FF7B4A100E0A88E /* CommandClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A262FF7B4A100E0A88E /* CommandClient.swift */; };
+		FBE71A3C2FF7B4A100E0A88E /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A1C2FF7B4A100E0A88E /* SharedPreferences.swift */; };
+		FBE71A3D2FF7B4A100E0A88E /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A1E2FF7B4A100E0A88E /* PacketTunnelProvider.swift */; };
+		FBE71A3E2FF7B4A100E0A88E /* FilePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A2E2FF7B4A100E0A88E /* FilePath.swift */; };
+		FBE71A3F2FF7B4A100E0A88E /* ExtensionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A292FF7B4A100E0A88E /* ExtensionErrors.swift */; };
+		FBE71A402FF7B4A100E0A88E /* DnsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A222FF7B4A100E0A88E /* DnsManager.swift */; };
+		FBE71A422FF7B4A100E0A88E /* ExtensionPlatformInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE71A2A2FF7B4A100E0A88E /* ExtensionPlatformInterface.swift */; };
+		FBE71A502FF7B4A100E0A88E /* Libbox.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBE71A512FF7B4A100E0A88E /* Libbox.xcframework */; };
+		FBE71A522FF7B4A100E0A88E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBE71A532FF7B4A100E0A88E /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +46,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 97C146ED1CF9000F007C117D;
 			remoteInfo = Runner;
+		};
+		FBE719D12FF7B04400E0A88E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FBE719C82FF7B04400E0A88E;
+			remoteInfo = SingBoxExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -38,18 +67,34 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FBE719D42FF7B04400E0A88E /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FBE719D32FF7B04400E0A88E /* SingBoxExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0FAAC596D0CFD0E5AFDD03B1 /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
+		32B387F4515123B087C7BB82 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
+		559EB12CD9950AD8EAE55106 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
+		6A976929D26A8738E4A3DA8A /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7884E8672EC3CC0400C636F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
+		8236985BF8315588B70DF524 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,25 +102,118 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9EDDCE6142959B5A545EBE1 /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBD03F9E3CBFE18D9ADFD060 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFE0D8BE430D2DCDC14E1025 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
+		FBE719C42FF7AE2900E0A88E /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
+		FBE719C92FF7B04400E0A88E /* SingBoxExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SingBoxExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBE719CA2FF7B04400E0A88E /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		FBE71A1B2FF7B4A100E0A88E /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		FBE71A1C2FF7B4A100E0A88E /* SharedPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPreferences.swift; sourceTree = "<group>"; };
+		FBE71A1E2FF7B4A100E0A88E /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		FBE71A202FF7B4A100E0A88E /* BlockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockManager.swift; sourceTree = "<group>"; };
+		FBE71A212FF7B4A100E0A88E /* BypassManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BypassManager.swift; sourceTree = "<group>"; };
+		FBE71A222FF7B4A100E0A88E /* DnsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsManager.swift; sourceTree = "<group>"; };
+		FBE71A232FF7B4A100E0A88E /* ServerConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigManager.swift; sourceTree = "<group>"; };
+		FBE71A242FF7B4A100E0A88E /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		FBE71A262FF7B4A100E0A88E /* CommandClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandClient.swift; sourceTree = "<group>"; };
+		FBE71A272FF7B4A100E0A88E /* Extension+Iterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Iterator.swift"; sourceTree = "<group>"; };
+		FBE71A282FF7B4A100E0A88E /* Extension+RunBlocking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+RunBlocking.swift"; sourceTree = "<group>"; };
+		FBE71A292FF7B4A100E0A88E /* ExtensionErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionErrors.swift; sourceTree = "<group>"; };
+		FBE71A2A2FF7B4A100E0A88E /* ExtensionPlatformInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionPlatformInterface.swift; sourceTree = "<group>"; };
+		FBE71A2B2FF7B4A100E0A88E /* ExtensionProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionProfile.swift; sourceTree = "<group>"; };
+		FBE71A2C2FF7B4A100E0A88E /* NEVPNStatus+isConnected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NEVPNStatus+isConnected.swift"; sourceTree = "<group>"; };
+		FBE71A2E2FF7B4A100E0A88E /* FilePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePath.swift; sourceTree = "<group>"; };
+		FBE71A302FF7B4A100E0A88E /* SingBoxPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingBoxPlugin.swift; sourceTree = "<group>"; };
+		FBE71A512FF7B4A100E0A88E /* Libbox.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Libbox.xcframework; path = ../plugins/sing_box/ios/Frameworks/Libbox.xcframework; sourceTree = "<group>"; };
+		FBE71A532FF7B4A100E0A88E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FBE719D82FF7B04400E0A88E /* Exceptions for "SingBoxExtension" folder in "SingBoxExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = FBE719C82FF7B04400E0A88E /* SingBoxExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		FBE719CC2FF7B04400E0A88E /* SingBoxExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FBE719D82FF7B04400E0A88E /* Exceptions for "SingBoxExtension" folder in "SingBoxExtension" target */,
+			);
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = SingBoxExtension;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		7C3B155AE154EA5F1317EE36 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B113BB5256C9F1D147D8C7CD /* Pods_RunnerTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		97C146EB1CF9000F007C117D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66EBF9F12FDBABDFFEF870F8 /* Pods_Runner.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBE719C62FF7B04400E0A88E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBE719CB2FF7B04400E0A88E /* NetworkExtension.framework in Frameworks */,
+				FBE71A502FF7B4A100E0A88E /* Libbox.xcframework in Frameworks */,
+				FBE71A522FF7B4A100E0A88E /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		012B22ECFEA8B1370842AEF0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BBD03F9E3CBFE18D9ADFD060 /* Pods_Runner.framework */,
+				B9EDDCE6142959B5A545EBE1 /* Pods_RunnerTests.framework */,
+				FBE719CA2FF7B04400E0A88E /* NetworkExtension.framework */,
+				FBE71A512FF7B4A100E0A88E /* Libbox.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		331C8082294A63A400263BE5 /* RunnerTests */ = {
 			isa = PBXGroup;
 			children = (
 				331C807B294A618700263BE5 /* RunnerTests.swift */,
 			);
 			path = RunnerTests;
+			sourceTree = "<group>";
+		};
+		7E632391A92AFD98347FB2C7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				559EB12CD9950AD8EAE55106 /* Pods-Runner.debug.xcconfig */,
+				BFE0D8BE430D2DCDC14E1025 /* Pods-Runner.release.xcconfig */,
+				32B387F4515123B087C7BB82 /* Pods-Runner.profile.xcconfig */,
+				0FAAC596D0CFD0E5AFDD03B1 /* Pods-RunnerTests.debug.xcconfig */,
+				8236985BF8315588B70DF524 /* Pods-RunnerTests.release.xcconfig */,
+				6A976929D26A8738E4A3DA8A /* Pods-RunnerTests.profile.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		9740EEB11CF90186004384FC /* Flutter */ = {
@@ -92,10 +230,14 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
+				FBE71A312FF7B4A100E0A88E /* Classes */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
+				FBE719CC2FF7B04400E0A88E /* SingBoxExtension */,
 				97C146EF1CF9000F007C117D /* Products */,
 				331C8082294A63A400263BE5 /* RunnerTests */,
+				7E632391A92AFD98347FB2C7 /* Pods */,
+				012B22ECFEA8B1370842AEF0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +246,7 @@
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
 				331C8081294A63A400263BE5 /* RunnerTests.xctest */,
+				FBE719C92FF7B04400E0A88E /* SingBoxExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,6 +254,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				FBE719C42FF7AE2900E0A88E /* Runner.entitlements */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -124,6 +268,70 @@
 			path = Runner;
 			sourceTree = "<group>";
 		};
+		FBE71A1D2FF7B4A100E0A88E /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				FBE71A1B2FF7B4A100E0A88E /* Database.swift */,
+				FBE71A1C2FF7B4A100E0A88E /* SharedPreferences.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		FBE71A1F2FF7B4A100E0A88E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				FBE71A1E2FF7B4A100E0A88E /* PacketTunnelProvider.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		FBE71A252FF7B4A100E0A88E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FBE71A202FF7B4A100E0A88E /* BlockManager.swift */,
+				FBE71A212FF7B4A100E0A88E /* BypassManager.swift */,
+				FBE71A222FF7B4A100E0A88E /* DnsManager.swift */,
+				FBE71A232FF7B4A100E0A88E /* ServerConfigManager.swift */,
+				FBE71A242FF7B4A100E0A88E /* SettingsManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		FBE71A2D2FF7B4A100E0A88E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FBE71A262FF7B4A100E0A88E /* CommandClient.swift */,
+				FBE71A272FF7B4A100E0A88E /* Extension+Iterator.swift */,
+				FBE71A282FF7B4A100E0A88E /* Extension+RunBlocking.swift */,
+				FBE71A292FF7B4A100E0A88E /* ExtensionErrors.swift */,
+				FBE71A2A2FF7B4A100E0A88E /* ExtensionPlatformInterface.swift */,
+				FBE71A2B2FF7B4A100E0A88E /* ExtensionProfile.swift */,
+				FBE71A2C2FF7B4A100E0A88E /* NEVPNStatus+isConnected.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FBE71A2F2FF7B4A100E0A88E /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				FBE71A2E2FF7B4A100E0A88E /* FilePath.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		FBE71A312FF7B4A100E0A88E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FBE71A1D2FF7B4A100E0A88E /* Database */,
+				FBE71A1F2FF7B4A100E0A88E /* Extension */,
+				FBE71A252FF7B4A100E0A88E /* Managers */,
+				FBE71A2D2FF7B4A100E0A88E /* Network */,
+				FBE71A2F2FF7B4A100E0A88E /* Shared */,
+				FBE71A302FF7B4A100E0A88E /* SingBoxPlugin.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -131,8 +339,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 331C8087294A63A400263BE5 /* Build configuration list for PBXNativeTarget "RunnerTests" */;
 			buildPhases = (
+				9C1983538CB2DE5F968491E7 /* [CP] Check Pods Manifest.lock */,
 				331C807D294A63A400263BE5 /* Sources */,
 				331C807F294A63A400263BE5 /* Resources */,
+				7C3B155AE154EA5F1317EE36 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -148,21 +358,46 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
 			buildPhases = (
+				8B9038840472D454ADDCA683 /* [CP] Check Pods Manifest.lock */,
 				9740EEB61CF901F6004384FC /* Run Script */,
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
+				FBE719D42FF7B04400E0A88E /* Embed Foundation Extensions */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
+				DA66F2E7897100644AD40A51 /* [CP] Embed Pods Frameworks */,
+				B3FDEAEB3101E85D4D04932C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FBE719D22FF7B04400E0A88E /* PBXTargetDependency */,
 			);
 			name = Runner;
 			productName = Runner;
 			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
 			productType = "com.apple.product-type.application";
+		};
+		FBE719C82FF7B04400E0A88E /* SingBoxExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FBE719D92FF7B04400E0A88E /* Build configuration list for PBXNativeTarget "SingBoxExtension" */;
+			buildPhases = (
+				FBE719C52FF7B04400E0A88E /* Sources */,
+				FBE719C62FF7B04400E0A88E /* Frameworks */,
+				FBE719C72FF7B04400E0A88E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				FBE719CC2FF7B04400E0A88E /* SingBoxExtension */,
+			);
+			name = SingBoxExtension;
+			productName = SingBoxExtension;
+			productReference = FBE719C92FF7B04400E0A88E /* SingBoxExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -171,6 +406,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 1510;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
@@ -181,6 +417,9 @@
 					97C146ED1CF9000F007C117D = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 1100;
+					};
+					FBE719C82FF7B04400E0A88E = {
+						CreatedOnToolsVersion = 26.5;
 					};
 				};
 			};
@@ -199,6 +438,7 @@
 			targets = (
 				97C146ED1CF9000F007C117D /* Runner */,
 				331C8080294A63A400263BE5 /* RunnerTests */,
+				FBE719C82FF7B04400E0A88E /* SingBoxExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -222,6 +462,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FBE719C72FF7B04400E0A88E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -241,6 +488,28 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin";
 		};
+		8B9038840472D454ADDCA683 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Runner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9740EEB61CF901F6004384FC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -255,6 +524,62 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+		};
+		9C1983538CB2DE5F968491E7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RunnerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3FDEAEB3101E85D4D04932C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA66F2E7897100644AD40A51 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -277,6 +602,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FBE719C52FF7B04400E0A88E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBE71A322FF7B4A100E0A88E /* BypassManager.swift in Sources */,
+				FBE71A332FF7B4A100E0A88E /* ServerConfigManager.swift in Sources */,
+				FBE71A342FF7B4A100E0A88E /* NEVPNStatus+isConnected.swift in Sources */,
+				FBE71A352FF7B4A100E0A88E /* BlockManager.swift in Sources */,
+				FBE71A362FF7B4A100E0A88E /* SettingsManager.swift in Sources */,
+				FBE71A372FF7B4A100E0A88E /* Database.swift in Sources */,
+				FBE71A382FF7B4A100E0A88E /* ExtensionProfile.swift in Sources */,
+				FBE71A392FF7B4A100E0A88E /* Extension+Iterator.swift in Sources */,
+				FBE71A3A2FF7B4A100E0A88E /* Extension+RunBlocking.swift in Sources */,
+				FBE71A3B2FF7B4A100E0A88E /* CommandClient.swift in Sources */,
+				FBE71A3C2FF7B4A100E0A88E /* SharedPreferences.swift in Sources */,
+				FBE71A3D2FF7B4A100E0A88E /* PacketTunnelProvider.swift in Sources */,
+				FBE71A3E2FF7B4A100E0A88E /* FilePath.swift in Sources */,
+				FBE71A3F2FF7B4A100E0A88E /* ExtensionErrors.swift in Sources */,
+				FBE71A402FF7B4A100E0A88E /* DnsManager.swift in Sources */,
+				FBE71A422FF7B4A100E0A88E /* ExtensionPlatformInterface.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -284,6 +632,11 @@
 			isa = PBXTargetDependency;
 			target = 97C146ED1CF9000F007C117D /* Runner */;
 			targetProxy = 331C8085294A63A400263BE5 /* PBXContainerItemProxy */;
+		};
+		FBE719D22FF7B04400E0A88E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FBE719C82FF7B04400E0A88E /* SingBoxExtension */;
+			targetProxy = FBE719D12FF7B04400E0A88E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -331,6 +684,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -353,6 +707,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -365,10 +720,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = XFQWUDC98X;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Barys VPN";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -383,6 +741,7 @@
 		};
 		331C8088294A63A400263BE5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0FAAC596D0CFD0E5AFDD03B1 /* Pods-RunnerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -400,6 +759,7 @@
 		};
 		331C8089294A63A400263BE5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8236985BF8315588B70DF524 /* Pods-RunnerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -415,6 +775,7 @@
 		};
 		331C808A294A63A400263BE5 /* Profile */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A976929D26A8738E4A3DA8A /* Pods-RunnerTests.profile.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -452,6 +813,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -481,6 +843,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -509,6 +872,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -531,6 +895,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -545,10 +910,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = XFQWUDC98X;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Barys VPN";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -568,10 +936,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = XFQWUDC98X;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Barys VPN";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -583,6 +954,129 @@
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
+		};
+		FBE719D52FF7B04400E0A88E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = SingBoxExtension/SingBoxExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XFQWUDC98X;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SingBoxExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SingBoxExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.rudnowski.freevpn.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FBE719D62FF7B04400E0A88E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = SingBoxExtension/SingBoxExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XFQWUDC98X;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SingBoxExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SingBoxExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.rudnowski.freevpn.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FBE719D72FF7B04400E0A88E /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = SingBoxExtension/SingBoxExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XFQWUDC98X;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SingBoxExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SingBoxExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.rudnowski.freevpn.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Profile;
 		};
 /* End XCBuildConfiguration section */
 
@@ -613,6 +1107,16 @@
 				97C147061CF9000F007C117D /* Debug */,
 				97C147071CF9000F007C117D /* Release */,
 				249021D4217E4FDB00AE95B9 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FBE719D92FF7B04400E0A88E /* Build configuration list for PBXNativeTarget "SingBoxExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBE719D52FF7B04400E0A88E /* Debug */,
+				FBE719D62FF7B04400E0A88E /* Release */,
+				FBE719D72FF7B04400E0A88E /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

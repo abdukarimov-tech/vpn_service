@@ -39,6 +39,10 @@ dependencies:
   provider: ^6.1.0
   device_info_plus: ^10.1.0
   google_mobile_ads: ^5.1.0
+  # iOS-only VPN core (sing-box) vendored locally so bundle id / App Group can be
+  # customized. Android continues to use flutter_v2ray.
+  sing_box:
+    path: plugins/sing_box
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +68,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/icon.jpeg
+    - assets/icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -95,4 +99,4 @@ flutter:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/icon.jpeg"
+  image_path: "assets/icon.png"

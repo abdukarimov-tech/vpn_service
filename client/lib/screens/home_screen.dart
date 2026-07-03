@@ -48,19 +48,35 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       await provider.disconnect();
       _pulseController.stop();
     } else if (provider.vpnState == 'DISCONNECTED' || provider.vpnState == 'DENIED') {
-      // Show ad first, then connect on success
-      final watchedAd = await AdService().showAd(context);
+      // Ask for the VPN permission first so its system dialog doesn't collide
+      // with the full-screen ad.
+      final hasPermission = await provider.requestVpnPermission();
       if (!mounted) return;
-      if (watchedAd) {
-        await provider.connect();
-        _pulseController.repeat(reverse: true);
-      } else {
+      if (!hasPermission) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(settings.translate('ad_warning')),
             backgroundColor: Colors.redAccent,
           ),
         );
+        return;
+      }
+
+      // Tell the user we're connecting in the background while they watch the ad.
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(settings.translate('connecting_ad_message')),
+          duration: const Duration(seconds: 4),
+        ),
+      );
+
+      // Start connecting and show the ad at the same time.
+      final connectFuture = provider.connect();
+      await AdService().showAd(context);
+      await connectFuture;
+      if (!mounted) return;
+      if (provider.isConnected) {
+        _pulseController.repeat(reverse: true);
       }
     }
   }

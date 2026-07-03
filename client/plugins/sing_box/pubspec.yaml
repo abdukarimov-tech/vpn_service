@@ -1,0 +1,29 @@
+name: sing_box
+description: A Flutter plugin for sing-box, providing platform-specific implementations for Android and iOS. Supports VPN connection management, statistics monitoring, bypass rules, DNS configuration, and more.
+version: 0.0.1
+homepage: https://github.com/qusadprod/sing_box
+repository: https://github.com/qusadprod/sing_box
+topics:
+  - flutter-plugin
+  - vpn
+  - sing-box
+  - proxy
+  - network
+
+environment:
+  sdk: ^3.10.4
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+
+flutter:
+  plugin:
+    platforms:
+      ios:
+        pluginClass: SingBoxPlugin
