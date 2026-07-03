@@ -75,3 +75,4 @@ macos/Flutter/flutter_export_environment.sh
 
 # Build artifacts (APK/AAB/IPA for distribution)
 client/dist/
+server/vpn_server
