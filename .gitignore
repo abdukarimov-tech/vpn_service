@@ -9,6 +9,7 @@ Thumbs.db
 
 # Environment / credentials
 .env
+server/.env
 
 # Go / Backend secrets & binaries
 server/vpn_api

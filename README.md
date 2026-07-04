@@ -107,12 +107,12 @@ Production API is served over HTTPS via a reverse proxy, e.g. `https://your-doma
    - `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_SSLMODE`
    - `PORT` — API listen port (default `8080`)
    - `NODE_AGENT_TOKEN` — shared secret for node agents
-   - `ADMIN_TOKEN` — secret for the admin dashboard
-3. Start:
+3. Copy `server/.env.example` to `server/.env` and set `ADMIN_TOKEN` (admin dashboard secret; not in git).
+4. Start:
    ```bash
    docker compose up -d --build
    ```
-4. Postgres tables (`vpn_users`, `servers`) are created automatically on first run.
+5. Postgres tables (`vpn_users`, `servers`) are created automatically on first run.
 
 ### HTTPS (Production)
 
@@ -291,12 +291,12 @@ graph TD
    - `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_SSLMODE`
    - `PORT` — порт API (по умолчанию `8080`)
    - `NODE_AGENT_TOKEN` — секрет для агентов нод
-   - `ADMIN_TOKEN` — секрет для админ-панели
-3. Запуск:
+3. Скопировать `server/.env.example` в `server/.env` и задать `ADMIN_TOKEN` (секрет админки; не в git).
+4. Запуск:
    ```bash
    docker compose up -d --build
    ```
-4. Таблицы Postgres создаются автоматически при первом запуске.
+5. Таблицы Postgres создаются автоматически при первом запуске.
 
 ### HTTPS (продакшен)
 

@@ -20,6 +20,8 @@ services:
     container_name: vpn-api
     ports:
       - "8080:8080"
+    env_file:
+      - .env
     environment:
       - DB_HOST=vpn-db
       - DB_PORT=5432
@@ -29,7 +31,6 @@ services:
       - DB_SSLMODE=disable
       - PORT=8080
       - NODE_AGENT_TOKEN=kzAlm4ty_9f3B7dQ2xR8sV1nT6wY0pL
-      - ADMIN_TOKEN=barysAdmin_2026_Kx7pQ9mZ2vR5tW8n
     depends_on:
       vpn-db:
         condition: service_healthy
