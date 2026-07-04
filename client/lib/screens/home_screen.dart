@@ -48,17 +48,53 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       await provider.disconnect();
       _pulseController.stop();
     } else if (provider.vpnState == 'DISCONNECTED' || provider.vpnState == 'DENIED') {
-      // Show ad first, then connect on success
-      final watchedAd = await AdService().showAd(context);
+      // Ask for the VPN permission first so its system dialog doesn't collide
+      // with the full-screen ad.
+      final hasPermission = await provider.requestVpnPermission();
       if (!mounted) return;
-      if (watchedAd) {
-        await provider.connect();
-        _pulseController.repeat(reverse: true);
-      } else {
+      if (!hasPermission) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(settings.translate('ad_warning')),
             backgroundColor: Colors.redAccent,
+          ),
+        );
+        return;
+      }
+
+      // Rewarded flow: the user must watch the ad first, and only then do we
+      // start the VPN connection.
+      final rewardEarned = await AdService().showAd(context);
+      if (!mounted) return;
+      if (!rewardEarned) {
+        // Ad was dismissed before the reward was granted - do not connect.
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(settings.translate('ad_warning')),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+        return;
+      }
+
+      // Ad watched - now connect. The provider moves to CONNECTING and the UI
+      // reflects the state automatically.
+      await provider.connect();
+      if (!mounted) return;
+      if (provider.isConnected) {
+        _pulseController.repeat(reverse: true);
+      }
+      // The iOS tunnel can fail asynchronously; wait for the provider to report
+      // the real error from the Network Extension and show it to the user.
+      await Future.delayed(const Duration(seconds: 7));
+      if (!mounted) return;
+      final err = provider.lastConnectError;
+      if (err != null && err.isNotEmpty && !provider.isConnected) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('VPN error: $err'),
+            backgroundColor: Colors.redAccent,
+            duration: const Duration(seconds: 12),
           ),
         );
       }
@@ -99,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(6),
                 child: Image.asset(
-                  'assets/icon.jpeg',
+                  'assets/icon.png',
                   height: 32,
                   width: 32,
                   fit: BoxFit.cover,

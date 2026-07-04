@@ -54,7 +54,7 @@ class ServersScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   TextButton.icon(
-                    onPressed: () => provider.init(),
+                    onPressed: provider.isLoading ? null : () => provider.refreshServers(),
                     icon: Icon(Icons.refresh, color: accentColor),
                     label: Text(
                       settings.translate('refresh'),

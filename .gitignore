@@ -72,3 +72,8 @@ macos/Flutter/flutter_export_environment.sh
 *.njsproj
 *.sln
 *.sw?
+
+# Build artifacts (APK/AAB/IPA for distribution)
+client/dist/
+server/vpn_server
+docs/export-compliance-self-classification.pdf

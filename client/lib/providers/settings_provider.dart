@@ -44,8 +44,8 @@ class SettingsProvider with ChangeNotifier {
 
   static const Map<String, Map<String, String>> _localizedValues = {
     'ru': {
-      'title': 'FREE VPN',
-      'secured': 'ЗАЩИЩЕНО',
+      'title': 'Barys VPN',
+      'secured': 'ПОДКЛЮЧЕНО',
       'connecting': 'ПОДКЛЮЧЕНИЕ...',
       'disconnected': 'ОТКЛЮЧЕНО',
       'protocol': 'ПРОТОКОЛ',
@@ -58,6 +58,9 @@ class SettingsProvider with ChangeNotifier {
       'no_servers': 'Нет доступных серверов',
       'refresh': 'Обновить',
       'ad_warning': 'Необходимо досмотреть видео для подключения к VPN',
+      'connecting_ad_message': 'Посмотрите рекламу пока мы подключаемся',
+      'ad_watching_title': 'Просмотр рекламы',
+      'ad_watching_desc': 'Пожалуйста, подождите. VPN подключится автоматически после завершения видео.',
       'settings': 'Настройки',
       'theme': 'Тема оформления',
       'language': 'Язык интерфейса',
@@ -72,7 +75,7 @@ class SettingsProvider with ChangeNotifier {
       'english': 'English',
     },
     'en': {
-      'title': 'FREE VPN',
+      'title': 'Barys VPN',
       'secured': 'SECURED',
       'connecting': 'CONNECTING...',
       'disconnected': 'DISCONNECTED',
@@ -86,6 +89,9 @@ class SettingsProvider with ChangeNotifier {
       'no_servers': 'No servers available',
       'refresh': 'Refresh',
       'ad_warning': 'You need to watch the video to connect to VPN',
+      'connecting_ad_message': 'Watch the ad while we connect',
+      'ad_watching_title': 'Watching ad',
+      'ad_watching_desc': 'Please wait. The VPN will connect automatically after the video finishes.',
       'settings': 'Settings',
       'theme': 'Theme Mode',
       'language': 'Language',

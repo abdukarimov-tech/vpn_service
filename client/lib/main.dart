@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
     final settings = Provider.of<SettingsProvider>(context);
 
     return MaterialApp(
-      title: 'FREE VPN',
+      title: 'Barys VPN',
       debugShowCheckedModeBanner: false,
       themeMode: settings.themeMode,
       theme: ThemeData(

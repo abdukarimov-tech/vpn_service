@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:client/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/provider.dart';
 
 class AdService {
   static final AdService _instance = AdService._internal();
@@ -11,7 +13,7 @@ class AdService {
 
   bool _initialized = false;
   bool useMockAds = false; // Set to true to use the fake countdown dialog instead of AdMob
-  bool useTestAds = false; // Real (production) ad units are used; registered devices below still get test ads
+  bool useTestAds = false; // Production: serve real rewarded ads. Registered test devices (_testDeviceIds) still get test ads.
 
   // Devices registered here receive TEST ads even with production ad unit IDs
   // (safe to click, no policy risk). Add device IDs from logcat:
@@ -44,7 +46,7 @@ class AdService {
 
   // Your real (production) rewarded ad units.
   static const String _androidRealRewarded = 'ca-app-pub-3676275694536393/7251475065';
-  static const String _iosRealRewarded = 'ca-app-pub-3676275694536393/7251475065'; // TODO: set a dedicated iOS unit
+  static const String _iosRealRewarded = 'ca-app-pub-3676275694536393/8902101107';
 
   String get _rewardedAdUnitId {
     if (Platform.isAndroid) {
@@ -76,6 +78,8 @@ class AdService {
     final completer = Completer<bool>();
     int secondsRemaining = 3;
     Timer? timer;
+
+    final settings = Provider.of<SettingsProvider>(context, listen: false);
 
     showDialog(
       context: context,
@@ -111,19 +115,19 @@ class AdService {
                       color: Colors.cyanAccent,
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      "Просмотр рекламы",
-                      style: TextStyle(
+                    Text(
+                      settings.translate('ad_watching_title'),
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      "Пожалуйста, подождите. VPN подключится автоматически после завершения видео.",
+                    Text(
+                      settings.translate('ad_watching_desc'),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 14,
                       ),

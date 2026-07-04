@@ -50,11 +50,16 @@ func main() {
 	// Client-facing endpoints
 	http.HandleFunc("/api/register", handleRegister)
 	http.HandleFunc("/api/connect", handleConnect)
+	http.HandleFunc("/api/delete", handleDelete)
 	http.HandleFunc("/api/health", handleHealth)
 
 	// Node-agent endpoints (token protected)
 	http.HandleFunc("/api/nodes/register", handleNodeRegister)
 	http.HandleFunc("/api/nodes/clients", handleNodeClients)
+
+	// Admin dashboard (token protected)
+	http.HandleFunc("/admin", handleAdmin)
+	http.HandleFunc("/api/stats", handleStats)
 
 	port := getEnv("PORT", "8080")
 	log.Printf("Server running on port %s", port)
@@ -142,6 +147,37 @@ func handleConnect(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(`{"status":"ok"}`))
+}
+
+// handleDelete removes all data associated with a device_id. This backs the
+// Google Play / App Store "users can request data deletion" requirement: the
+// app (or a support request) can delete the user's record and issued UUID.
+func handleDelete(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req ConnectRequest
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil || req.DeviceID == "" {
+		http.Error(w, "Bad request", http.StatusBadRequest)
+		return
+	}
+
+	res, err := DB.Exec("DELETE FROM vpn_users WHERE device_id = $1", req.DeviceID)
+	if err != nil {
+		log.Printf("Error deleting data for device %s: %v", req.DeviceID, err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	affected, _ := res.RowsAffected()
+	log.Printf("Data deletion for device=%s, rows removed=%d", req.DeviceID, affected)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"status":"deleted"}`))
 }
 
 func handleHealth(w http.ResponseWriter, r *http.Request) {

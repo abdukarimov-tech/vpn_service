@@ -43,3 +43,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Prebuilt sing-box core for iOS (~270MB). Not committed; rebuild with
+# scripts/build_libbox_ios.sh (see that file for the exact toolchain versions).
+/plugins/sing_box/ios/Frameworks/Libbox.xcframework/
