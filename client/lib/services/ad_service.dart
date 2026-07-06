@@ -13,7 +13,7 @@ class AdService {
 
   bool _initialized = false;
   bool useMockAds = false; // Set to true to use the fake countdown dialog instead of AdMob
-  bool useTestAds = false; // Production: serve real rewarded ads. Registered test devices (_testDeviceIds) still get test ads.
+  bool useTestAds = true; // Test build: Google sample rewarded ad units (safe for Play review / internal testing).
 
   // Devices registered here receive TEST ads even with production ad unit IDs
   // (safe to click, no policy risk). Add device IDs from logcat:

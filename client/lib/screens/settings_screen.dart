@@ -127,35 +127,50 @@ class SettingsScreen extends StatelessWidget {
             [
               _buildSettingsCard(
                 isDark: isDark,
-                child: ListTile(
-                  leading: Icon(Icons.language_outlined, color: accentColor),
-                  title: Text(
-                    settings.translate('language'),
-                    style: TextStyle(
-                      color: isDark ? Colors.white : Colors.black87,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  trailing: SegmentedButton<String>(
-                    style: SegmentedButton.styleFrom(
-                      selectedBackgroundColor: accentColor.withValues(alpha: 0.2),
-                      selectedForegroundColor: accentColor,
-                      foregroundColor: isDark ? Colors.white70 : Colors.black54,
-                    ),
-                    segments: <ButtonSegment<String>>[
-                      ButtonSegment<String>(
-                        value: 'ru',
-                        label: Text(settings.translate('russian')),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.language_outlined, color: accentColor),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Text(
+                              settings.translate('language'),
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black87,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      ButtonSegment<String>(
-                        value: 'en',
-                        label: Text(settings.translate('english')),
+                      const SizedBox(height: 12),
+                      SegmentedButton<String>(
+                        style: SegmentedButton.styleFrom(
+                          selectedBackgroundColor: accentColor.withValues(alpha: 0.2),
+                          selectedForegroundColor: accentColor,
+                          foregroundColor: isDark ? Colors.white70 : Colors.black54,
+                        ),
+                        segments: <ButtonSegment<String>>[
+                          ButtonSegment<String>(
+                            value: 'ru',
+                            label: Text(settings.translate('russian')),
+                          ),
+                          ButtonSegment<String>(
+                            value: 'en',
+                            label: Text(settings.translate('english')),
+                          ),
+                        ],
+                        selected: {settings.languageCode},
+                        onSelectionChanged: (Set<String> newSelection) {
+                          settings.setLanguage(newSelection.first);
+                        },
                       ),
                     ],
-                    selected: {settings.languageCode},
-                    onSelectionChanged: (Set<String> newSelection) {
-                      settings.setLanguage(newSelection.first);
-                    },
                   ),
                 ),
               ),
