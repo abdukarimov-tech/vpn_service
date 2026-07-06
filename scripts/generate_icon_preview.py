@@ -9,10 +9,9 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-FG_PATH = ROOT / "client/android/app/src/main/res/drawable-xxxhdpi/ic_launcher_foreground.png"
+FG_PATH = ROOT / "client/assets/icon_foreground.png"
 OUT_DIR = ROOT / "docs/icon-previews"
 BG = (11, 21, 40)  # #0B1528
-INSET = 0.16
 SIZE = 512
 PAD = 48
 LABEL_H = 56
@@ -21,10 +20,9 @@ LABEL_H = 56
 def compose_adaptive_icon(size: int = SIZE) -> Image.Image:
     fg = Image.open(FG_PATH).convert("RGBA")
     canvas = Image.new("RGBA", (size, size), BG + (255,))
-    margin = int(size * INSET)
-    inner = size - 2 * margin
-    fg_resized = fg.resize((inner, inner), Image.Resampling.LANCZOS)
-    canvas.paste(fg_resized, (margin, margin), fg_resized)
+    # Foreground is pre-sized on a 1024 canvas; scale to full adaptive layer (no inset).
+    fg_resized = fg.resize((size, size), Image.Resampling.LANCZOS)
+    canvas.alpha_composite(fg_resized)
     return canvas
 
 
@@ -158,7 +156,7 @@ def main() -> None:
     )
     draw.text(
         (grid_full.width // 2, 52),
-        "Adaptive icon: фон #0B1528 + foreground inset 16%",
+        "Adaptive icon: фон #0B1528 + прозрачный foreground (заполнение ~96%)",
         fill=(140, 200, 220),
         anchor="mt",
         font=title_font,
