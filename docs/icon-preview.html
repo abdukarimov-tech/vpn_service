@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Barys VPN — превью иконки</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #121218;
+      color: #eee;
+      padding: 24px;
+    }
+    h1 { margin: 0 0 8px; font-size: 1.5rem; }
+    p { color: #9ab; margin: 0 0 24px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+    }
+    figure {
+      margin: 0;
+      background: #1c1c26;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #2a2a38;
+    }
+    figure img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+    figcaption {
+      margin-top: 12px;
+      font-weight: 600;
+    }
+    figcaption span {
+      display: block;
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: #889;
+      margin-top: 4px;
+    }
+    .hero {
+      max-width: 1200px;
+      margin-bottom: 32px;
+    }
+    .hero img {
+      width: 100%;
+      max-width: 960px;
+      border-radius: 12px;
+      border: 1px solid #2a2a38;
+    }
+    code { background: #252530; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Barys VPN — превью иконки</h1>
+  <p>Adaptive icon: фон <code>#0B1528</code>, foreground inset 16%. Сгенерировано скриптом <code>scripts/generate_icon_preview.py</code>.</p>
+
+  <div class="hero">
+    <img src="icon-previews/all-devices-grid.png" alt="Все устройства" />
+  </div>
+
+  <div class="grid">
+    <figure>
+      <img src="icon-previews/pixel_circle.png" alt="Google Pixel" />
+      <figcaption>Google Pixel<span>Круг (Adaptive Icon)</span></figcaption>
+    </figure>
+    <figure>
+      <img src="icon-previews/samsung_squircle.png" alt="Samsung" />
+      <figcaption>Samsung One UI<span>Squircle</span></figcaption>
+    </figure>
+    <figure>
+      <img src="icon-previews/rounded_square.png" alt="Xiaomi Huawei" />
+      <figcaption>Xiaomi / Huawei<span>Скруглённый квадрат</span></figcaption>
+    </figure>
+    <figure>
+      <img src="icon-previews/stock_android.png" alt="Stock Android" />
+      <figcaption>Stock Android 13+<span>Круг</span></figcaption>
+    </figure>
+    <figure>
+      <img src="icon-previews/legacy_square.png" alt="Legacy Android" />
+      <figcaption>Старый Android (&lt;8)<span>Квадрат</span></figcaption>
+    </figure>
+    <figure>
+      <img src="icon-previews/ios_rounded.png" alt="iOS" />
+      <figcaption>iOS<span>Скруглённый квадрат ~22%</span></figcaption>
+    </figure>
+  </div>
+</body>
+</html>
